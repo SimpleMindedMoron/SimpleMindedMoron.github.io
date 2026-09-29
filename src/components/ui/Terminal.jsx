@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { motion } from "motion/react";
 
 const INITIAL_LINES = [
   { type: "system", text: "SimplicityOS Terminal v3.4 [Embedded & Web Environment]" },
@@ -184,7 +185,13 @@ Dual-boots Linux Mint & Windows 11.`,
 
   return (
     <section className="terminal-section" id="terminal">
-      <div className="terminal-wrapper">
+      <motion.div
+        className="terminal-wrapper"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+      >
         <div className="section-header-block">
           <div className="section-pill">
             <span className="pill-dot minimal"></span>
@@ -219,7 +226,7 @@ Dual-boots Linux Mint & Windows 11.`,
           <div className="terminal-quick-chips">
             <span className="chips-label">COMMANDS:</span>
             {SUGGESTED_COMMANDS.map((cmd) => (
-              <button
+              <motion.button
                 key={cmd}
                 type="button"
                 className="chip-btn"
@@ -227,9 +234,12 @@ Dual-boots Linux Mint & Windows 11.`,
                   e.stopPropagation();
                   runCommand(cmd);
                 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 350, damping: 25 }}
               >
                 ${cmd}
-              </button>
+              </motion.button>
             ))}
           </div>
 
@@ -263,7 +273,7 @@ Dual-boots Linux Mint & Windows 11.`,
             />
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

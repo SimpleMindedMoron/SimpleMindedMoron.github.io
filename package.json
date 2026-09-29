@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@firecms/neat": "^1.0.2",
+    "motion": "^13.4.6",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.1"

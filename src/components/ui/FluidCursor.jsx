@@ -35,8 +35,6 @@ function FluidCursor() {
         target.closest("input") ||
         target.closest("textarea") ||
         target.closest(".interactive-project-card") ||
-        target.closest(".board-tab-btn") ||
-        target.closest(".pin-pill") ||
         target.closest(".fact-card") ||
         target.closest(".about-pillar-btn")
       );

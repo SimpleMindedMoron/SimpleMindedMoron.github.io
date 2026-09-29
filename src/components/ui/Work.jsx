@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { projects, categories } from "../../data/projectsData";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
@@ -22,7 +23,13 @@ function Work() {
 
   return (
     <section className="work-section" id="work">
-      <div className="work-container">
+      <motion.div
+        className="work-container"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+      >
         {/* Section Header */}
         <div className="section-header-block">
           <div className="section-pill">
@@ -48,16 +55,20 @@ function Work() {
                 cat.id === "all"
                   ? projects.length
                   : projects.filter((p) => p.category === cat.id).length;
+              const isActive = selectedCategory === cat.id;
               return (
-                <button
+                <motion.button
                   key={cat.id}
                   type="button"
-                  className={`category-tab-btn ${selectedCategory === cat.id ? "active" : ""}`}
+                  className={`category-tab-btn ${isActive ? "active" : ""}`}
                   onClick={() => setSelectedCategory(cat.id)}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
                   <span>{cat.label}</span>
                   <span className="tab-count-badge">{count}</span>
-                </button>
+                </motion.button>
               );
             })}
           </div>
@@ -89,20 +100,34 @@ function Work() {
           </div>
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid with AnimatePresence & Layout physics */}
         {filteredProjects.length > 0 ? (
-          <div className="projects-grid">
-            {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                onSelect={(proj) => setActiveModalProject(proj)}
-              />
-            ))}
-          </div>
+          <motion.div className="projects-grid" layout>
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 22 }}
+                >
+                  <ProjectCard
+                    project={project}
+                    index={index}
+                    onSelect={(proj) => setActiveModalProject(proj)}
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         ) : (
-          <div className="empty-projects-state">
+          <motion.div
+            className="empty-projects-state"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
             <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5" className="empty-svg-icon">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -119,17 +144,19 @@ function Work() {
             >
               Reset Filters
             </button>
-          </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
 
-      {/* Modal Dialog */}
-      {activeModalProject && (
-        <ProjectModal
-          project={activeModalProject}
-          onClose={() => setActiveModalProject(null)}
-        />
-      )}
+      {/* Modal Dialog with AnimatePresence */}
+      <AnimatePresence>
+        {activeModalProject && (
+          <ProjectModal
+            project={activeModalProject}
+            onClose={() => setActiveModalProject(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "motion/react";
 import Socials from "../ui/Socials";
 import linkedinIcon from "../../assets/images/linkedin.png";
 import instagramIcon from "../../assets/images/instagram.png";
@@ -11,6 +12,30 @@ const ROLES = [
   "Dual-Boot Workflow (Linux Mint + Windows 11)",
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 140,
+      damping: 18,
+    },
+  },
+};
+
 function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -19,7 +44,7 @@ function Hero() {
 
   useEffect(() => {
     const currentRole = ROLES[roleIndex];
-    const speed = isDeleting ? 25 : 55;
+    const speed = isDeleting ? 25 : 50;
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
@@ -54,9 +79,14 @@ function Hero() {
 
   return (
     <main className="hero-section" id="hero">
-      <div className="hero-container">
+      <motion.div
+        className="hero-container"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Minimal Meta Tags */}
-        <div className="hero-badge-wrap">
+        <motion.div className="hero-badge-wrap" variants={itemVariants}>
           <div className="minimal-status-pill">
             <span className="minimal-live-dot"></span>
             <span>Available for engineering & hardware roles</span>
@@ -66,67 +96,71 @@ function Hero() {
             <span className="pill-dot-sep">/</span>
             <span>Windows 11</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Hero Title */}
         <div className="hero-content">
-          <span className="hero-eyebrow">ARJUN SANESH &bull; SIMPLICITY</span>
-          <h1 className="hero-headline">
+          <motion.span className="hero-eyebrow" variants={itemVariants}>
+            ARJUN SANESH &bull; SIMPLICITY
+          </motion.span>
+
+          <motion.h1 className="hero-headline" variants={itemVariants}>
             Engineering at the intersection of <br />
             <span className="hero-headline-highlight">Software, Hardware & Systems.</span>
-          </h1>
+          </motion.h1>
 
           {/* Minimalist Dynamic Role Box */}
-          <div className="dynamic-role-box">
+          <motion.div className="dynamic-role-box" variants={itemVariants}>
             <span className="role-prefix">&gt; </span>
             <span className="role-typed-text">{displayText}</span>
             <span className="cursor-blink">_</span>
-          </div>
+          </motion.div>
 
-          <p className="hero-description">
-            I build systems across both hardware and software.
+          <motion.p className="hero-description" variants={itemVariants}>
+            Building systems across both hardware and software.
             From wiring laser security tripwires on ESP32s and tuning ultrasonic distance logic to developing
             fast reactive web applications in React and ROS 2 robotics nodes on Linux.
-          </p>
+          </motion.p>
 
           {/* Clean Minimal Actions */}
-          <div className="hero-actions">
-            <button
+          <motion.div className="hero-actions" variants={itemVariants}>
+            <motion.button
               type="button"
               className="btn-minimal-primary"
               onClick={() => scrollTo("work")}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 350, damping: 20 }}
             >
               <span>Selected Works</span>
               <span className="btn-arrow">→</span>
-            </button>
+            </motion.button>
 
-            <button
-              type="button"
-              className="btn-minimal-secondary"
-              onClick={() => scrollTo("hardware")}
-            >
-              <span>Hardware Lab</span>
-            </button>
-
-            <button
+            <motion.button
               type="button"
               className="btn-minimal-secondary"
               onClick={() => scrollTo("terminal")}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 350, damping: 20 }}
             >
               <span>Terminal CLI</span>
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               type="button"
               className={`btn-minimal-copy ${copiedEmail ? "copied" : ""}`}
               onClick={handleCopyEmail}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 350, damping: 20 }}
             >
               <span>{copiedEmail ? "Copied" : "Copy Email"}</span>
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
 
           {/* Minimal Metrics Row */}
-          <div className="hero-metrics-bar">
+          <motion.div className="hero-metrics-bar" variants={itemVariants}>
             <div className="hero-metric-item">
               <span className="metric-val">3+</span>
               <span className="metric-lbl">Years Building</span>
@@ -162,9 +196,9 @@ function Hero() {
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </main>
   );
 }

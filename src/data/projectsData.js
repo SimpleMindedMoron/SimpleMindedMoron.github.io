@@ -127,7 +127,7 @@ export const projects = [
     architecture: [
       "Component-driven reactive architecture without heavy UI libraries",
       "Zero-overhead custom fluid cursor with Lerp physics",
-      "Integrated virtual hardware workbench and interactive terminal",
+      "Integrated fluid Motion physics transitions and interactive terminal",
       "Fluid responsive layout for mobile, tablet, and widescreen",
     ],
     github: "https://github.com/Simplicity005/Simplicity005.github.io",
