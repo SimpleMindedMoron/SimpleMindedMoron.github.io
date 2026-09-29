@@ -1,113 +1,141 @@
-import { useState } from "react";
-import { projects } from "../../data/projectsData";
+import { useState, useMemo } from "react";
+import { projects, categories } from "../../data/projectsData";
 import ProjectCard from "./ProjectCard";
-import { useScrollReveal } from "../../hooks/useScrollReveal";
+import ProjectModal from "./ProjectModal";
+import { playSound } from "../../utils/audio";
 
 function Work() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState("next");
-  const revealRef = useScrollReveal();
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeModalProject, setActiveModalProject] = useState(null);
 
-  const goTo = (nextIndex, dir) => {
-    const wrapped = (nextIndex + projects.length) % projects.length;
-    setDirection(dir);
-    setActiveIndex(wrapped);
+  const filteredProjects = useMemo(() => {
+    return projects.filter((p) => {
+      const matchesCategory =
+        selectedCategory === "all" || p.category === selectedCategory;
+      const matchesSearch =
+        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (p.tags && p.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase())));
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  const handleCategoryChange = (catId) => {
+    playSound("tab");
+    setSelectedCategory(catId);
   };
 
-  const activeProject = projects[activeIndex];
-
   return (
-    <section className="project-container" id="work">
-      <div className="project-inner reveal-zoom" ref={revealRef}>
-        <div className="project-title-row">
-          <h1 className="project-title">Selected Works.</h1>
-          {/* Will link through to a dedicated projects page once it exists */}
-          <button
-            type="button"
-            className="project-title-arrow"
-            aria-label="View all projects"
-            title="Projects page — coming soon"
-          >
-            <svg viewBox="0 0 24 24" fill="none">
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+    <section className="work-section" id="work">
+      <div className="work-container">
+        {/* Section Header */}
+        <div className="section-header-block">
+          <div className="section-pill">
+            <span className="pill-dot violet"></span>
+            <span>PORTFOLIO & RESEARCH WORKS</span>
+          </div>
+          <h2 className="section-heading">
+            Selected Works & <br />
+            <span className="gradient-text-violet">Engineering Proofs.</span>
+          </h2>
+          <p className="section-subtext">
+            From spatial optimization models in Bangalore to laser tripwire microcontrollers and ROS robotics.
+            Click any card to inspect architecture blueprints and technical metrics.
+          </p>
+        </div>
+
+        {/* Filter Controls Bar */}
+        <div className="work-controls-bar">
+          {/* Category Tabs */}
+          <div className="category-tabs">
+            {categories.map((cat) => {
+              const count =
+                cat.id === "all"
+                  ? projects.length
+                  : projects.filter((p) => p.category === cat.id).length;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  className={`category-tab-btn ${selectedCategory === cat.id ? "active" : ""}`}
+                  onClick={() => handleCategoryChange(cat.id)}
+                >
+                  <span>{cat.label}</span>
+                  <span className="tab-count-badge">{count}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Quick Search Input */}
+          <div className="work-search-box">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-          </button>
-        </div>
-
-        {/* Desktop: full carousel, click any card to expand it */}
-        <div className="carousel">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              isActive={index === activeIndex}
-              onClick={() => goTo(index, index > activeIndex ? "next" : "prev")}
+            <input
+              type="text"
+              className="search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search tech or keywords (e.g. ESP32, Python, SLAM)..."
+              aria-label="Search projects by keyword"
             />
-          ))}
-        </div>
-
-        {/* Mobile: one project at a time, slides in on prev/next */}
-        <div className="carousel-mobile">
-          <div
-            className={`carousel-mobile-track slide-${direction}`}
-            key={activeProject.id}
-          >
-            <ProjectCard
-              project={activeProject}
-              index={activeIndex}
-              isActive={true}
-              onClick={() => {}}
-            />
+            {searchQuery && (
+              <button
+                type="button"
+                className="search-clear-btn"
+                onClick={() => setSearchQuery("")}
+                aria-label="Clear search"
+              >
+                ✕
+              </button>
+            )}
           </div>
         </div>
 
-        <div className="carousel-nav">
-          <button
-            type="button"
-            className="carousel-nav-btn"
-            onClick={() => goTo(activeIndex - 1, "prev")}
-            aria-label="Previous project"
-          >
-            <svg viewBox="0 0 24 24" fill="none">
-              <path
-                d="M15 6l-6 6 6 6"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+        {/* Projects Grid */}
+        {filteredProjects.length > 0 ? (
+          <div className="projects-grid">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                onSelect={(proj) => setActiveModalProject(proj)}
               />
-            </svg>
-          </button>
-          <span className="carousel-nav-count">
-            {String(activeIndex + 1).padStart(2, "0")} /{" "}
-            {String(projects.length).padStart(2, "0")}
-          </span>
-          <button
-            type="button"
-            className="carousel-nav-btn"
-            onClick={() => goTo(activeIndex + 1, "next")}
-            aria-label="Next project"
-          >
-            <svg viewBox="0 0 24 24" fill="none">
-              <path
-                d="M9 6l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="empty-projects-state">
+            <div className="empty-icon">🔍</div>
+            <h3>No matching projects found</h3>
+            <p>Try clearing your search query or switching category filter.</p>
+            <button
+              type="button"
+              className="reset-filter-btn"
+              onClick={() => {
+                playSound("click");
+                setSearchQuery("");
+                setSelectedCategory("all");
+              }}
+            >
+              Reset Filters
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Modal Dialog */}
+      {activeModalProject && (
+        <ProjectModal
+          project={activeModalProject}
+          onClose={() => setActiveModalProject(null)}
+        />
+      )}
     </section>
   );
 }
+
 export default Work;
