@@ -1,40 +1,20 @@
 import { useState, useEffect } from "react";
 import logo from "../../assets/Logo.png";
-import { isAudioMuted, toggleAudioMute, playSound } from "../../utils/audio";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [muted, setMuted] = useState(isAudioMuted());
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    const handleSoundToggle = (e) => {
-      setMuted(e.detail.muted);
-    };
-    window.addEventListener("simplicity-sound-toggle", handleSoundToggle);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("simplicity-sound-toggle", handleSoundToggle);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleMuteToggle = () => {
-    const newMuted = toggleAudioMute();
-    setMuted(newMuted);
-    if (!newMuted) {
-      playSound("click");
-    }
-  };
 
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
-    playSound("click");
     setIsMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
@@ -43,10 +23,7 @@ function Navbar() {
   };
 
   return (
-    <header
-      className={`navbar-wrapper ${isScrolled ? "is-scrolled" : ""}`}
-      id="main-nav"
-    >
+    <header className={`navbar-wrapper ${isScrolled ? "is-scrolled" : ""}`} id="main-nav">
       <nav className={`navbar-pill ${isMobileMenuOpen ? "mobile-open" : ""}`}>
         {/* Brand / Logo */}
         <div className="nav-brand">
@@ -92,7 +69,7 @@ function Navbar() {
             onClick={(e) => scrollToSection(e, "terminal")}
             className="nav-link-item"
           >
-            CLI Terminal
+            Terminal
           </a>
           <a
             href="#contact"
@@ -103,45 +80,21 @@ function Navbar() {
           </a>
         </div>
 
-        {/* Right Action Icons & Buttons */}
+        {/* Right Action */}
         <div className="nav-right-actions">
-          {/* Sound FX Toggle */}
-          <button
-            type="button"
-            className={`sound-toggle-btn ${muted ? "muted" : "active"}`}
-            onClick={handleMuteToggle}
-            title={muted ? "Sound Muted (Click to Enable)" : "Sound Active (Click to Mute)"}
-            aria-label="Toggle UI Sound Effects"
-          >
-            {muted ? (
-              <span className="sound-icon">🔇</span>
-            ) : (
-              <div className="sound-waves">
-                <span className="wave-bar bar-1"></span>
-                <span className="wave-bar bar-2"></span>
-                <span className="wave-bar bar-3"></span>
-              </div>
-            )}
-            <span className="sound-label">{muted ? "Mute" : "Audio FX"}</span>
-          </button>
-
-          {/* Quick CTA */}
           <a
             href="#contact"
             onClick={(e) => scrollToSection(e, "contact")}
             className="nav-cta-btn"
           >
-            <span>Let's Talk</span>
+            <span>Get in touch</span>
           </a>
 
-          {/* Hamburger Icon */}
+          {/* Hamburger Icon for Mobile */}
           <button
             type="button"
             className="mobile-hamburger-btn"
-            onClick={() => {
-              playSound("click");
-              setIsMobileMenuOpen(!isMobileMenuOpen);
-            }}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Navigation Menu"
           >
             <span className={`hamburger-bar ${isMobileMenuOpen ? "top-open" : ""}`}></span>
@@ -151,7 +104,7 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Backdrop & Drawer */}
+      {/* Mobile Drawer */}
       <div
         className={`mobile-drawer-backdrop ${isMobileMenuOpen ? "visible" : ""}`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -166,8 +119,12 @@ function Navbar() {
               type="button"
               className="drawer-close-btn"
               onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Close menu"
             >
-              ✕
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
           </div>
           <div className="drawer-links">
@@ -176,46 +133,36 @@ function Navbar() {
               onClick={(e) => scrollToSection(e, "about")}
               className="drawer-link"
             >
-              👤 About Philosophy
+              About
             </a>
             <a
               href="#hardware"
               onClick={(e) => scrollToSection(e, "hardware")}
               className="drawer-link"
             >
-              ⚡ Hardware & Sensors Lab
+              Hardware Lab
             </a>
             <a
               href="#work"
               onClick={(e) => scrollToSection(e, "work")}
               className="drawer-link"
             >
-              🚀 Selected Works
+              Projects
             </a>
             <a
               href="#terminal"
               onClick={(e) => scrollToSection(e, "terminal")}
               className="drawer-link"
             >
-              💻 Interactive CLI
+              Terminal
             </a>
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "contact")}
               className="drawer-link"
             >
-              📬 Direct Contact
+              Contact
             </a>
-          </div>
-
-          <div className="drawer-footer">
-            <button
-              type="button"
-              className="drawer-sound-btn"
-              onClick={handleMuteToggle}
-            >
-              <span>{muted ? "🔇 Sound Effects: OFF" : "🔊 Sound Effects: ON"}</span>
-            </button>
           </div>
         </div>
       </div>

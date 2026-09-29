@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { playSound } from "../../utils/audio";
 
 const INITIAL_LINES = [
   { type: "system", text: "SimplicityOS Terminal v3.4 [Embedded & Web Environment]" },
-  { type: "system", text: "Dual-Boot Kernel: Linux Mint 21.3 / Windows 11 detected." },
+  { type: "system", text: "Dual-Boot Environment: Linux Mint 21.3 / Windows 11." },
   { type: "hint", text: "Type 'help' or click any command shortcut below to explore:" },
 ];
 
@@ -35,7 +34,6 @@ function Terminal() {
     const cmd = rawCmd.trim().toLowerCase();
     if (!cmd) return;
 
-    playSound("terminal");
     setCommandHistory((prev) => [...prev, rawCmd]);
     setCmdIndex(-1);
 
@@ -49,61 +47,60 @@ function Terminal() {
   • whoami    - About Arjun Sanesh & background
   • skills    - Technical toolkit & stack breakdown
   • hardware  - Microcontrollers, sensors & robotics
-  • projects  - Research papers & engineering builds
+  • projects  - Software applications & hardware builds
   • neofetch  - System information & hardware specs
-  • contact   - Social links & email
+  • contact   - Profiles & email
   • clear     - Clear terminal buffer
-  • date      - Print current local time`,
+  • date      - Print current system time`,
         });
         break;
 
       case "whoami":
         newEntries.push({
           type: "output",
-          text: `ARJUN SANESH (Online moniker: Simplicity / Simple Minded Moron)
-Role: Full-Stack Developer & Hardware Hacker
+          text: `ARJUN SANESH (Simplicity / Simple Minded Moron)
+Role: Software Developer & Hardware Tinkerer
 Location: Bangalore, India
-Mindset: Passionate about clean visual design, bare-metal hardware circuits,
-and stochastic research. If it has code or electrons, I want to take it apart
-and rebuild it better. Dual-boots Linux Mint & Windows.`,
+Focus: Building clean web applications and physical hardware systems.
+Experienced with ESP32, Arduino, sensors, and full-stack web development.
+Dual-boots Linux Mint & Windows 11.`,
         });
         break;
 
       case "skills":
         newEntries.push({
           type: "output",
-          text: `TECHNICAL ARSENAL:
-  [Web & Frontend]  : React 19, JavaScript (ESNext), Modern CSS, HTML5, Vite
-  [Hardware & IoT]  : ESP32, Arduino Uno/Nano, Raspberry Pi, FreeRTOS, C/C++
-  [Sensors & Proto] : LiDAR, Laser Tripping, Ultrasonic, Relays, I2C, SPI, UART
-  [AI & Research]   : MATLAB, Python (NumPy, SciPy, NetworkX), Stochastic Modeling
-  [Robotics]        : ROS 2, Gazebo Simulation, SLAM, Kinematics
-  [Dev Environment] : Linux Mint, Windows 11, Git, Bash, VS Code`,
+          text: `TECHNICAL TOOLKIT:
+  [Software & Web] : React 19, JavaScript, Modern CSS, HTML5, Vite, Node.js
+  [Hardware & IoT] : ESP32, Arduino Uno/Nano, FreeRTOS, Embedded C/C++
+  [Sensors & IO]   : Laser tripwires, Ultrasonic (HC-SR04), Relays, I2C, SPI, UART
+  [Robotics]       : ROS 2, Gazebo, SLAM, Differential Drive
+  [Environment]    : Linux Mint, Windows 11, Git, Bash`,
         });
         break;
 
       case "hardware":
         newEntries.push({
           type: "output",
-          text: `HARDWARE LAB INVENTORY:
-  • ESP-WROOM-32 : Wi-Fi & BLE dual core IoT controller
-  • Arduino Uno  : Real-time sensor multiplexing & PWM actuator grid
-  • Laser Grid   : Optical tripwire perimeter with <2ms alert latency
-  • Smart Sonar  : Ultrasonic automated parking guide
-  • ROS Rover    : LiDAR-driven obstacle mapping & path planning`,
+          text: `HARDWARE INVENTORY:
+  • ESP-WROOM-32 : Wi-Fi & BLE dual core IoT microcontroller
+  • Arduino Uno  : Sensor multiplexing & actuator control
+  • Laser Grid   : Optical tripwire perimeter with <2ms latency
+  • Sonar Sensor : Ultrasonic vehicle distance detection
+  • ROS 2 Node   : LiDAR mapping & differential drive navigation`,
         });
         break;
 
       case "projects":
         newEntries.push({
           type: "output",
-          text: `KEY WORKS:
-  1. Startup Hub Optimization       [MATLAB / Python / Spatial Graph]
-  2. Fake News Stochastic Modeling  [Branching Processes / Monte Carlo]
-  3. IoT Laser Grid & Security      [ESP32 / Arduino / Relays]
-  4. Autonomous Mobile Robot        [ROS 2 / SLAM / LiDAR]
-  5. Simplicity Interactive Web     [React 19 / Canvas Shaders / Audio]
-(Scroll to 'Selected Works' below or click any card for interactive specs)`,
+          text: `FEATURED WORKS:
+  1. IoT Laser Security Grid       [ESP32 / Arduino / Relays / C++]
+  2. Startup Hub Spatial Optimizer [Python / MATLAB / Algorithms]
+  3. Autonomous Robotics Node      [ROS 2 / SLAM / LiDAR / Linux Mint]
+  4. Ultrasonic Parking System     [Arduino / HC-SR04 / Sensors]
+  5. Simplicity Portfolio UI       [React 19 / Modern CSS / Vite]
+(Select any card in 'Selected Works' for architecture details)`,
         });
         break;
 
@@ -114,13 +111,12 @@ and rebuild it better. Dual-boots Linux Mint & Windows.`,
     /\\_/\\     arjun@simplicity-rig
    ( o.o )    --------------------
     > ^ <     OS: Linux Mint 21.3 / Windows 11 Dual-Boot
-              Host: Custom Workstation & Embedded Rig
-              Kernel: 6.5.0-x86_64-simplicity
-              Uptime: 3+ years tinkering non-stop
-              Shell: zsh / bash / pwsh
-              Terminal: React19 Web-Virtual-PTY
-              Hardware: ESP32, Arduino, Raspberry Pi, Logic Analyzers
-              Memory: Infinite Curiosity
+              Host: Custom Embedded & Workstation Rig
+              Kernel: 6.5.0-x86_64
+              Uptime: 3+ years tinkering
+              Shell: zsh / bash
+              Terminal: Web PTY
+              Hardware: ESP32, Arduino Uno, Sensor Arrays
 `,
         });
         break;
@@ -128,11 +124,11 @@ and rebuild it better. Dual-boots Linux Mint & Windows.`,
       case "contact":
         newEntries.push({
           type: "output",
-          text: `CONNECT WITH ARJUN:
+          text: `CONNECT:
   • Email     : arjunsanesh@gmail.com
   • LinkedIn  : https://www.linkedin.com/in/arjun-sanesh/
   • GitHub    : https://github.com/Simplicity005
-  • Instagram : @simplicity.codes`,
+  • Instagram : https://www.instagram.com`,
         });
         break;
 
@@ -191,15 +187,15 @@ and rebuild it better. Dual-boots Linux Mint & Windows.`,
       <div className="terminal-wrapper">
         <div className="section-header-block">
           <div className="section-pill">
-            <span className="pill-dot cyan"></span>
-            <span>INTERACTIVE CLI COMMAND CENTER</span>
+            <span className="pill-dot minimal"></span>
+            <span>CLI INTERFACE</span>
           </div>
           <h2 className="section-heading">
-            Prefer the Command Line? <br />
-            <span className="gradient-text-cyan">Run commands directly.</span>
+            Command Center & <br />
+            <span>Terminal.</span>
           </h2>
           <p className="section-subtext">
-            For fellow terminal geeks: inspect my environment, inspect projects, or trigger custom outputs right here.
+            For terminal workflows: run commands directly to inspect environment, skills, and projects.
           </p>
         </div>
 
@@ -208,20 +204,20 @@ and rebuild it better. Dual-boots Linux Mint & Windows.`,
           {/* Title Bar */}
           <div className="terminal-bar">
             <div className="terminal-dots">
-              <span className="dot red"></span>
-              <span className="dot yellow"></span>
-              <span className="dot green"></span>
+              <span className="dot"></span>
+              <span className="dot"></span>
+              <span className="dot"></span>
             </div>
-            <div className="terminal-title">arjun@simplicity: ~ (zsh/mint)</div>
+            <div className="terminal-title">arjun@simplicity: ~ (mint/zsh)</div>
             <div className="terminal-status-badge">
               <span className="pulse-mini"></span>
-              <span>LIVE PTY</span>
+              <span>READY</span>
             </div>
           </div>
 
           {/* Quick command suggestion chips */}
           <div className="terminal-quick-chips">
-            <span className="chips-label">QUICK COMMANDS:</span>
+            <span className="chips-label">COMMANDS:</span>
             {SUGGESTED_COMMANDS.map((cmd) => (
               <button
                 key={cmd}
@@ -261,7 +257,7 @@ and rebuild it better. Dual-boots Linux Mint & Windows.`,
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="type 'help' or click quick commands above..."
+              placeholder="type 'help' or click commands above..."
               autoComplete="off"
               spellCheck="false"
             />

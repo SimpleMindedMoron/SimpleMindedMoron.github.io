@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import { playSound } from "../../utils/audio";
 import Socials from "../ui/Socials";
 import linkedinIcon from "../../assets/images/linkedin.png";
 import instagramIcon from "../../assets/images/instagram.png";
 
 const ROLES = [
   "Full-Stack Web Developer",
-  "Hardware & IoT Hacker (ESP32 / Arduino)",
-  "Stochastic & Spatial Optimization Researcher",
-  "Robotics & Sensor Fusion Explorer",
-  "Dual-Boot Mindset (Linux Mint + Win11)",
+  "Hardware & Embedded Systems Hacker",
+  "Microcontroller & IoT Developer",
+  "Robotics & Sensor Systems Explorer",
+  "Dual-Boot Workflow (Linux Mint + Windows 11)",
 ];
 
 function Hero() {
@@ -41,7 +40,6 @@ function Hero() {
   }, [displayText, isDeleting, roleIndex]);
 
   const scrollTo = (id) => {
-    playSound("click");
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -49,7 +47,6 @@ function Hero() {
   };
 
   const handleCopyEmail = () => {
-    playSound("success");
     navigator.clipboard.writeText("arjunsanesh@gmail.com");
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2200);
@@ -62,7 +59,7 @@ function Hero() {
         <div className="hero-badge-wrap">
           <div className="minimal-status-pill">
             <span className="minimal-live-dot"></span>
-            <span>Available for innovative projects & research</span>
+            <span>Available for engineering & hardware roles</span>
           </div>
           <div className="minimal-dual-pill">
             <span>Linux Mint</span>
@@ -76,7 +73,7 @@ function Hero() {
           <span className="hero-eyebrow">ARJUN SANESH &bull; SIMPLICITY</span>
           <h1 className="hero-headline">
             Engineering at the intersection of <br />
-            <span className="hero-headline-highlight">Software, Hardware & Curiosity.</span>
+            <span className="hero-headline-highlight">Software, Hardware & Systems.</span>
           </h1>
 
           {/* Minimalist Dynamic Role Box */}
@@ -87,9 +84,9 @@ function Hero() {
           </div>
 
           <p className="hero-description">
-            I don't believe in artificial silos between physical hardware and cloud software.
-            Whether it's formulating multi-objective optimization algorithms, wiring laser tripwire perimeters on ESP32s,
-            or building fast reactive web interfaces—I focus on tactile systems that solve real problems.
+            I build systems across both hardware and software.
+            From wiring laser security tripwires on ESP32s and tuning ultrasonic distance logic to developing
+            fast reactive web applications in React and ROS 2 robotics nodes on Linux.
           </p>
 
           {/* Clean Minimal Actions */}
@@ -124,7 +121,7 @@ function Hero() {
               className={`btn-minimal-copy ${copiedEmail ? "copied" : ""}`}
               onClick={handleCopyEmail}
             >
-              <span>{copiedEmail ? "✓ Copied" : "Copy Email"}</span>
+              <span>{copiedEmail ? "Copied" : "Copy Email"}</span>
             </button>
           </div>
 
@@ -141,8 +138,8 @@ function Hero() {
             </div>
             <div className="metric-sep"></div>
             <div className="hero-metric-item">
-              <span className="metric-val">2</span>
-              <span className="metric-lbl">Research Papers</span>
+              <span className="metric-val">IoT & Web</span>
+              <span className="metric-lbl">Core Focus</span>
             </div>
             <div className="metric-sep"></div>
             <div className="hero-socials-inline">

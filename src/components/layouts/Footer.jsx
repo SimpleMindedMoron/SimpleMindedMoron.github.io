@@ -1,5 +1,4 @@
 import logo from "../../assets/Logo.png";
-import { playSound } from "../../utils/audio";
 
 const footerLinks = [
   { label: "Top", href: "#hero" },
@@ -15,7 +14,6 @@ function Footer() {
 
   const scrollTo = (e, id) => {
     e.preventDefault();
-    playSound("click");
     const target = document.querySelector(id);
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
@@ -36,17 +34,16 @@ function Footer() {
               </div>
             </div>
             <p className="footer-bio-summary">
-              Crafting minimal, high-utility web applications, embedded microcontroller circuits,
-              and mathematical network models.
+              Full-stack web applications, embedded microcontroller systems, and robotics.
             </p>
             <div className="footer-pill-os">
-              <span>Dual-Boot Rig: Linux Mint + Windows 11</span>
+              <span>Linux Mint + Windows 11</span>
             </div>
           </div>
 
           {/* Nav Links */}
           <div className="footer-links-group">
-            <span className="footer-group-label">INDEX</span>
+            <span className="footer-group-label">NAVIGATION</span>
             <div className="footer-nav-list">
               {footerLinks.map((link) => (
                 <a
@@ -63,14 +60,13 @@ function Footer() {
 
           {/* Socials */}
           <div className="footer-links-group">
-            <span className="footer-group-label">CONNECT</span>
+            <span className="footer-group-label">PROFILES</span>
             <div className="footer-nav-list">
               <a
                 href="https://www.linkedin.com/in/arjun-sanesh/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-link-text"
-                onClick={() => playSound("click")}
               >
                 LinkedIn ↗
               </a>
@@ -79,7 +75,6 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-link-text"
-                onClick={() => playSound("click")}
               >
                 GitHub ↗
               </a>
@@ -88,7 +83,6 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-link-text"
-                onClick={() => playSound("click")}
               >
                 Instagram ↗
               </a>
@@ -96,10 +90,10 @@ function Footer() {
           </div>
         </div>
 
-        {/* Bottom separator bar */}
+        {/* Bottom bar */}
         <div className="footer-bottom-bar">
           <p className="footer-copyright-text">
-            &copy; {year} Arjun Sanesh. Built with precision and care.
+            &copy; {year} Arjun Sanesh.
           </p>
 
           <button

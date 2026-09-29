@@ -2,7 +2,6 @@ import { useState, useMemo } from "react";
 import { projects, categories } from "../../data/projectsData";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
-import { playSound } from "../../utils/audio";
 
 function Work() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -21,27 +20,22 @@ function Work() {
     });
   }, [selectedCategory, searchQuery]);
 
-  const handleCategoryChange = (catId) => {
-    playSound("tab");
-    setSelectedCategory(catId);
-  };
-
   return (
     <section className="work-section" id="work">
       <div className="work-container">
         {/* Section Header */}
         <div className="section-header-block">
           <div className="section-pill">
-            <span className="pill-dot violet"></span>
-            <span>PORTFOLIO & RESEARCH WORKS</span>
+            <span className="pill-dot minimal"></span>
+            <span>PORTFOLIO</span>
           </div>
           <h2 className="section-heading">
             Selected Works & <br />
-            <span className="gradient-text-violet">Engineering Proofs.</span>
+            <span>Systems.</span>
           </h2>
           <p className="section-subtext">
-            From spatial optimization models in Bangalore to laser tripwire microcontrollers and ROS robotics.
-            Click any card to inspect architecture blueprints and technical metrics.
+            Hardware builds, embedded sensor networks, and full-stack software applications.
+            Select any item to inspect its technical architecture.
           </p>
         </div>
 
@@ -59,7 +53,7 @@ function Work() {
                   key={cat.id}
                   type="button"
                   className={`category-tab-btn ${selectedCategory === cat.id ? "active" : ""}`}
-                  onClick={() => handleCategoryChange(cat.id)}
+                  onClick={() => setSelectedCategory(cat.id)}
                 >
                   <span>{cat.label}</span>
                   <span className="tab-count-badge">{count}</span>
@@ -70,7 +64,7 @@ function Work() {
 
           {/* Quick Search Input */}
           <div className="work-search-box">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
@@ -79,7 +73,7 @@ function Work() {
               className="search-input"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tech or keywords (e.g. ESP32, Python, SLAM)..."
+              placeholder="Search tech (e.g. ESP32, Python, C++)..."
               aria-label="Search projects by keyword"
             />
             {searchQuery && (
@@ -109,14 +103,16 @@ function Work() {
           </div>
         ) : (
           <div className="empty-projects-state">
-            <div className="empty-icon">🔍</div>
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5" className="empty-svg-icon">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
             <h3>No matching projects found</h3>
             <p>Try clearing your search query or switching category filter.</p>
             <button
               type="button"
               className="reset-filter-btn"
               onClick={() => {
-                playSound("click");
                 setSearchQuery("");
                 setSelectedCategory("all");
               }}

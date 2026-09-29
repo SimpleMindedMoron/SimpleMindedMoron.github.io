@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { playSound } from "../../utils/audio";
 
 function ProjectCard({ project, index, onSelect }) {
   const cardRef = useRef(null);
@@ -17,9 +16,9 @@ function ProjectCard({ project, index, onSelect }) {
       if (!cardRef.current) return;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -4.5;
-      const rotateY = ((x - centerX) / centerX) * 4.5;
-      cardRef.current.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+      const rotateX = ((y - centerY) / centerY) * -4;
+      const rotateY = ((x - centerX) / centerX) * 4;
+      cardRef.current.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
     });
   };
 
@@ -35,10 +34,7 @@ function ProjectCard({ project, index, onSelect }) {
       className="interactive-project-card"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onClick={() => {
-        playSound("open");
-        onSelect(project);
-      }}
+      onClick={() => onSelect(project)}
     >
       {/* Card Image Thumbnail */}
       <div className="card-image-wrap">

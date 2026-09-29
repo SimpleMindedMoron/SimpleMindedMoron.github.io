@@ -1,60 +1,50 @@
 import { useState } from "react";
-import { playSound } from "../../utils/audio";
 
 const PILLARS = [
   {
     id: "software",
-    icon: "💻",
-    title: "Software & Web Craft",
-    subtitle: "Frontend, APIs & Systems",
+    title: "Software & Web Engineering",
+    subtitle: "Frontend, APIs & Reactive UI",
     summary:
-      "I love building software that not only functions reliably but looks and feels exceptionally smooth. No boring templates—I craft bespoke reactive layouts, micro-interactions, and high-performance Web applications using modern React, Vite, and custom CSS.",
-    tags: ["React 19", "JavaScript (ESNext)", "Modern CSS / Glassmorphism", "Vite", "Node.js", "Web Audio API"],
+      "I build clean, responsive, and tactile web applications. I focus on performance, intuitive user experience, and zero-bloat code using modern React, modern CSS, and JavaScript. I care deeply about how software feels when interacted with.",
+    tags: ["React 19", "JavaScript", "Modern CSS", "Vite", "Node.js", "APIs"],
   },
   {
     id: "hardware",
-    icon: "⚡",
-    title: "Hardware & Physical Computing",
-    subtitle: "Microcontrollers & Embedded C++",
+    title: "Embedded Systems & IoT",
+    subtitle: "ESP32, Arduino & Circuit Logic",
     summary:
-      "I'm hands-on with soldering irons, breadboards, and logic analyzers. I develop interrupt-driven firmware for ESP32 and Arduino microcontrollers, building real-world automation matrices, laser perimeter alarms, and ultrasonic guidance systems.",
-    tags: ["ESP32 (FreeRTOS)", "Arduino Uno/Nano", "C/C++", "Sensors & Actuators", "Relays & Optocouplers", "I2C / SPI / UART"],
+      "Hands-on with microcontrollers, breadboards, and electronic components. I program interrupt-driven firmware in C++ for ESP32 and Arduino boards, building physical security tripwires, sensor arrays, and wireless telemetry feeds.",
+    tags: ["ESP32", "Arduino", "Embedded C++", "Sensors", "Relays", "I2C / SPI / UART"],
   },
   {
-    id: "research",
-    icon: "📐",
-    title: "Computational Modeling & AI",
-    subtitle: "Stochastic Branching & Optimization",
+    id: "robotics",
+    title: "Robotics & Physical Automation",
+    subtitle: "Kinematics, SLAM & Telemetry",
     summary:
-      "Beyond web apps and breadboards, I conduct research in stochastic processes and spatial optimization. Using MATLAB and Python, I formulate mathematical models for misinformation decay across social graphs and cost-optimal startup hub distribution.",
-    tags: ["MATLAB", "Python", "NumPy / SciPy", "Stochastic Modeling", "Graph Theory", "Optimization Algorithms"],
+      "Exploring mobile robotics using ROS 2 on Linux Mint. Working with LiDAR sensor streams, differential drive odometry, and automated spatial mapping for autonomous robotic navigation.",
+    tags: ["ROS 2", "Python", "LiDAR", "Kinematics", "SLAM", "FreeRTOS"],
   },
   {
     id: "environment",
-    icon: "🐧",
-    title: "The Rig & Dual-Boot Setup",
-    subtitle: "Linux Mint & Windows 11 Workflow",
+    title: "Dual-Boot Environment",
+    subtitle: "Linux Mint & Windows 11",
     summary:
-      "A proud dual-booter. I rely on Linux Mint for frictionless command-line tooling, ROS robotics nodes, and compile speed, seamlessly switching to Windows for specialized hardware flashing and CAD. Flexible, adaptable, and comfortable anywhere in the terminal.",
-    tags: ["Linux Mint", "Windows 11", "Bash & Zsh", "Git / GitHub", "ROS 2 Humble", "VS Code"],
+      "Dual-booting Linux Mint and Windows 11. I leverage Linux for terminal agility, package compiling, and ROS nodes, switching to Windows for specialized hardware flashers and toolchains.",
+    tags: ["Linux Mint", "Windows 11", "Bash & Zsh", "Git / GitHub", "VS Code"],
   },
 ];
 
 const FAST_FACTS = [
-  { label: "Moniker / Alias", val: "Simplicity (Simple Minded Moron)", note: "Keeping things minimal yet deeply capable" },
-  { label: "Primary OS", val: "Dual Boot: Linux Mint + Windows 11", note: "The best of both open-source and hardware tooling" },
-  { label: "Favorite Chip", val: "ESP-WROOM-32", note: "Dual cores, FreeRTOS, Wi-Fi and Bluetooth in a $4 package" },
-  { label: "Design Creed", val: "Tactile & Clean", note: "Software should feel alive under your fingertips" },
+  { label: "Moniker", val: "Simplicity (Simple Minded Moron)", note: "Keeping systems straightforward and efficient" },
+  { label: "Daily Operating Systems", val: "Dual Boot: Linux Mint + Windows 11", note: "Balancing open-source terminal power and hardware tooling" },
+  { label: "Preferred Chipset", val: "ESP-WROOM-32", note: "Dual cores, FreeRTOS, Wi-Fi and Bluetooth" },
+  { label: "Philosophy", val: "Clean, Tactile, No Clutter", note: "Hardware and software that gets straight to work" },
 ];
 
 function About() {
   const [activePillarId, setActivePillarId] = useState("software");
   const activePillar = PILLARS.find((p) => p.id === activePillarId) || PILLARS[0];
-
-  const handleSelectPillar = (id) => {
-    playSound("tab");
-    setActivePillarId(id);
-  };
 
   return (
     <section className="about-section" id="about">
@@ -62,16 +52,16 @@ function About() {
         {/* Section Header */}
         <div className="section-header-block">
           <div className="section-pill">
-            <span className="pill-dot blue"></span>
-            <span>WHO & WHY &mdash; PHILOSOPHY</span>
+            <span className="pill-dot minimal"></span>
+            <span>OVERVIEW & BACKGROUND</span>
           </div>
           <h2 className="section-heading">
-            Meet Arjun Sanesh. <br />
-            <span className="gradient-text-blue">The Dual-Mind Developer.</span>
+            Background & <br />
+            <span>Focus Areas.</span>
           </h2>
           <p className="section-subtext">
-            I don't have a formal degree in graphic design, but I am obsessed with making software feel effortless.
-            I bridge the gap between physical electrical components and intuitive software experiences.
+            I'm a developer who bridges software engineering and physical hardware.
+            I build both the logic running on the microcontroller and the interface displayed on the screen.
           </p>
         </div>
 
@@ -79,14 +69,14 @@ function About() {
         <div className="about-interactive-layout">
           {/* Pillar Selector Buttons */}
           <div className="about-pillars-nav">
-            {PILLARS.map((pillar) => (
+            {PILLARS.map((pillar, idx) => (
               <button
                 key={pillar.id}
                 type="button"
                 className={`about-pillar-btn ${activePillarId === pillar.id ? "active" : ""}`}
-                onClick={() => handleSelectPillar(pillar.id)}
+                onClick={() => setActivePillarId(pillar.id)}
               >
-                <span className="pillar-icon">{pillar.icon}</span>
+                <span className="pillar-num">{String(idx + 1).padStart(2, "0")}</span>
                 <div className="pillar-btn-text">
                   <span className="pillar-title">{pillar.title}</span>
                   <span className="pillar-sub">{pillar.subtitle}</span>
@@ -99,9 +89,8 @@ function About() {
           {/* Active Pillar Card */}
           <div className="about-pillar-display">
             <div className="display-card-top">
-              <span className="display-icon-large">{activePillar.icon}</span>
               <div>
-                <span className="display-kicker">FOCUS AREA</span>
+                <span className="display-kicker">FOCUS</span>
                 <h3 className="display-title">{activePillar.title}</h3>
                 <span className="display-subtitle">{activePillar.subtitle}</span>
               </div>
@@ -110,7 +99,7 @@ function About() {
             <p className="display-summary">{activePillar.summary}</p>
 
             <div className="display-tags-group">
-              <span className="display-tags-label">CORE TOOLKIT & SKILLS:</span>
+              <span className="display-tags-label">CORE TECHNOLOGIES:</span>
               <div className="display-tags">
                 {activePillar.tags.map((tag) => (
                   <span key={tag} className="display-tag-chip">
@@ -125,11 +114,7 @@ function About() {
         {/* Fast Facts Grid */}
         <div className="fast-facts-row">
           {FAST_FACTS.map((fact, idx) => (
-            <div
-              key={idx}
-              className="fact-card"
-              onClick={() => playSound("hover")}
-            >
+            <div key={idx} className="fact-card">
               <span className="fact-label">{fact.label}</span>
               <span className="fact-val">{fact.val}</span>
               <span className="fact-note">{fact.note}</span>

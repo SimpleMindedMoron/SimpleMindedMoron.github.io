@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { hardwareBoards } from "../../data/hardwareData";
-import { playSound } from "../../utils/audio";
 
 function HardwareLab() {
   const [selectedBoardId, setSelectedBoardId] = useState("esp32");
@@ -21,18 +20,18 @@ function HardwareLab() {
       const dynamicEvents = {
         esp32: [
           `[${timestamps}] [ADC] Laser beam intensity reading: 894 mV (CLEAR)`,
-          `[${timestamps}] [WIFI] RSSI: -48 dBm | Telemetry packet published to MQTT broker`,
-          `[${timestamps}] [HEAP] Free 8-bit RAM: 298,412 bytes | Core 0: 3.2% load`,
+          `[${timestamps}] [WIFI] RSSI: -48 dBm | Telemetry packet published via MQTT`,
+          `[${timestamps}] [HEAP] Free SRAM: 298,412 bytes | Core 0: 3.2% load`,
         ],
         arduino: [
-          `[${timestamps}] [SONAR] Echo pin pulse width: 1420 us | Distance: 24.1 cm`,
+          `[${timestamps}] [SONAR] Echo pulse width: 1420 us | Distance: 24.1 cm`,
           `[${timestamps}] [IO] Digital Pin 2 input verified STABLE | Interrupt ready`,
           `[${timestamps}] [ADC0] LDR analog sample: 742 / 1023 (ambient daylight)`,
         ],
         ros: [
           `[${timestamps}] [TOPIC] /scan: 360 ranges processed in 1.8ms`,
-          `[${timestamps}] [TF] Transform broadcasted: odom -> base_link (delta: +0.02m)`,
-          `[${timestamps}] [NAV] Trajectory cost evaluated: safe corridor clear`,
+          `[${timestamps}] [TF] Transform broadcast: odom -> base_link (delta: +0.02m)`,
+          `[${timestamps}] [NAV] Trajectory cost evaluated: obstacle clear`,
         ],
       };
 
@@ -44,12 +43,11 @@ function HardwareLab() {
         if (next.length > 25) next.shift();
         return next;
       });
-    }, 3800);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isSimRunning, selectedBoardId]);
 
-  // Auto scroll logs
   useEffect(() => {
     if (logContainerRef.current) {
       logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
@@ -57,7 +55,6 @@ function HardwareLab() {
   }, [logs]);
 
   const handleBoardSwitch = (id) => {
-    playSound("tab");
     setSelectedBoardId(id);
     const targetBoard = hardwareBoards.find((b) => b.id === id);
     if (targetBoard) {
@@ -67,12 +64,11 @@ function HardwareLab() {
   };
 
   const handleTriggerTest = () => {
-    playSound("success");
     setTestPulse(true);
     setLedState(true);
 
     const time = new Date().toLocaleTimeString();
-    const testMsg = `[${time}] >>> USER TRIGGERED INTERRUPT on ${activeBoard.pins[0].pin}! <<<`;
+    const testMsg = `[${time}] >>> USER TRIGGERED SIGNAL on ${activeBoard.pins[0].pin} <<<`;
     setLogs((prev) => [...prev, testMsg]);
 
     setTimeout(() => {
@@ -87,16 +83,16 @@ function HardwareLab() {
         {/* Section Header */}
         <div className="section-header-block">
           <div className="section-pill">
-            <span className="pill-dot emerald"></span>
-            <span>HARDWARE BENCH & EMBEDDED LAB</span>
+            <span className="pill-dot minimal"></span>
+            <span>EMBEDDED BENCH & SENSORS</span>
           </div>
           <h2 className="section-heading">
-            Tinkering with Silicon, <br />
-            <span className="gradient-text-amber">Sensors & Signals.</span>
+            Hardware Lab & <br />
+            <span>Interactive Workbench.</span>
           </h2>
           <p className="section-subtext">
-            I don't just write browser code—I design physical circuits, write bare-metal C++ on microcontrollers,
-            and build sensor grids that react in real-time. Test the interactive workbench below.
+            Physical circuits, microcontroller firmware in C++, and sensor matrices.
+            Select a board below to inspect its pin assignments and live serial telemetry.
           </p>
         </div>
 
@@ -157,7 +153,7 @@ function HardwareLab() {
                 {/* Pin Matrix List */}
                 <div className="board-pins-interactive">
                   <div className="pins-header">
-                    <span>PINOUT & SIGNALS (CLICK TO INSPECT)</span>
+                    <span>PINOUT & SIGNALS (SELECT TO INSPECT)</span>
                   </div>
                   <div className="pins-grid">
                     {activeBoard.pins.map((p, idx) => (
@@ -165,10 +161,7 @@ function HardwareLab() {
                         key={idx}
                         type="button"
                         className={`pin-pill ${activePin?.pin === p.pin ? "selected" : ""}`}
-                        onClick={() => {
-                          playSound("click");
-                          setActivePin(p);
-                        }}
+                        onClick={() => setActivePin(p)}
                       >
                         <span className="pin-indicator"></span>
                         <span className="pin-id">{p.pin}</span>
@@ -185,11 +178,11 @@ function HardwareLab() {
                   <div className="pin-detail-active">
                     <span className="detail-tag">{activePin.pin}</span>
                     <span className="detail-role"><strong>Role:</strong> {activePin.role}</span>
-                    <span className="detail-type"><strong>Bus / Mode:</strong> {activePin.type}</span>
+                    <span className="detail-type"><strong>Protocol:</strong> {activePin.type}</span>
                   </div>
                 ) : (
                   <div className="pin-detail-hint">
-                    <span>💡 Select any pin above to inspect bus protocols and pin assignments.</span>
+                    <span>Select any pin above to inspect its protocol and function.</span>
                   </div>
                 )}
               </div>
@@ -217,20 +210,17 @@ function HardwareLab() {
               <div className="serial-monitor">
                 <div className="serial-monitor-header">
                   <div className="terminal-dots">
-                    <span className="dot red"></span>
-                    <span className="dot yellow"></span>
-                    <span className="dot green"></span>
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                    <span className="dot"></span>
                   </div>
                   <span className="serial-title">SERIAL MONITOR (115200 BAUD)</span>
                   <button
                     type="button"
                     className="serial-toggle-btn"
-                    onClick={() => {
-                      playSound("click");
-                      setIsSimRunning(!isSimRunning);
-                    }}
+                    onClick={() => setIsSimRunning(!isSimRunning)}
                   >
-                    {isSimRunning ? "⏸ Pause Stream" : "▶ Resume Stream"}
+                    {isSimRunning ? "Pause" : "Resume"}
                   </button>
                 </div>
 
