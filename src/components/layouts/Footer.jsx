@@ -1,16 +1,21 @@
 import logo from "../../assets/Logo.png";
 
-const footerLinks = [
-  { label: "Top", href: "#hero" },
+const navigationLinks = [
   { label: "About", href: "#about" },
-  { label: "Hardware Lab", href: "#hardware" },
-  { label: "Projects", href: "#work" },
-  { label: "Terminal", href: "#terminal" },
+  { label: "Selected Works", href: "#work" },
+  { label: "Terminal CLI", href: "#terminal" },
   { label: "Contact", href: "#contact" },
 ];
 
+const profileLinks = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/arjun-sanesh/" },
+  { label: "GitHub", href: "https://github.com/Simplicity005" },
+  { label: "Instagram", href: "https://www.instagram.com" },
+  { label: "Email", href: "mailto:arjunsanesh@gmail.com" },
+];
+
 function Footer() {
-  const year = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
   const scrollTo = (e, id) => {
     e.preventDefault();
@@ -22,90 +27,78 @@ function Footer() {
 
   return (
     <footer className="site-footer">
-      <div className="footer-container">
-        <div className="footer-top-row">
-          {/* Brand */}
-          <div className="footer-brand-block">
-            <div className="footer-brand-title-wrap">
+      <div className="footer-inner-content">
+        <div className="footer-main-row">
+          {/* Brand Info */}
+          <div className="footer-brand-column">
+            <div className="footer-brand-header">
               <img src={logo} alt="Simplicity Logo" className="footer-brand-logo" />
               <div>
-                <h4 className="footer-brand-name">Arjun Sanesh</h4>
-                <span className="footer-brand-sub">Simplicity &bull; Software & Embedded Systems</span>
+                <span className="footer-brand-name">Arjun Sanesh</span>
+                <span className="footer-brand-handle">@Simplicity005</span>
               </div>
             </div>
-            <p className="footer-bio-summary">
-              Full-stack web applications, embedded microcontroller systems, and robotics.
+            <p className="footer-brand-bio">
+              Software and embedded systems engineer based in Bangalore, India. Focused on performant web architectures and microcontroller hardware.
             </p>
-            <div className="footer-pill-os">
-              <span>Linux Mint + Windows 11</span>
+            <div className="footer-os-tag">
+              <span>Dual-Boot: Linux Mint + Windows 11</span>
             </div>
           </div>
 
-          {/* Nav Links */}
-          <div className="footer-links-group">
-            <span className="footer-group-label">NAVIGATION</span>
-            <div className="footer-nav-list">
-              {footerLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="footer-link-text"
-                  onClick={(e) => scrollTo(e, link.href)}
-                >
-                  {link.label}
-                </a>
+          {/* Nav Links Column */}
+          <div className="footer-links-column">
+            <span className="footer-column-heading">INDEX</span>
+            <ul className="footer-links-list">
+              {navigationLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="footer-nav-anchor"
+                    onClick={(e) => scrollTo(e, link.href)}
+                  >
+                    {link.label}
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          {/* Socials */}
-          <div className="footer-links-group">
-            <span className="footer-group-label">PROFILES</span>
-            <div className="footer-nav-list">
-              <a
-                href="https://www.linkedin.com/in/arjun-sanesh/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link-text"
-              >
-                LinkedIn ↗
-              </a>
-              <a
-                href="https://github.com/Simplicity005"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link-text"
-              >
-                GitHub ↗
-              </a>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link-text"
-              >
-                Instagram ↗
-              </a>
-            </div>
+          {/* Social Profiles Column */}
+          <div className="footer-links-column">
+            <span className="footer-column-heading">CONNECT</span>
+            <ul className="footer-links-list">
+              {profileLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-nav-anchor"
+                  >
+                    <span>{link.label}</span>
+                    <span className="link-arrow-icon">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Footer Sub-Bar */}
         <div className="footer-bottom-bar">
-          <p className="footer-copyright-text">
-            &copy; {year} Arjun Sanesh.
-          </p>
+          <div className="footer-copyright-wrap">
+            <span>&copy; {currentYear} Arjun Sanesh. Built for simplicity and speed.</span>
+          </div>
 
           <button
             type="button"
-            className="footer-back-to-top"
+            className="footer-top-btn"
             onClick={(e) => scrollTo(e, "#hero")}
-            aria-label="Scroll back to top"
+            aria-label="Back to top"
           >
             <span>Back to top</span>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 19V5M5 12l7-7 7 7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <span className="top-arrow-icon">↑</span>
           </button>
         </div>
       </div>

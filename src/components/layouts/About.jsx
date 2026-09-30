@@ -4,57 +4,76 @@ import { motion, AnimatePresence } from "motion/react";
 const PILLARS = [
   {
     id: "software",
+    num: "01",
     title: "Software & Web Engineering",
-    subtitle: "Frontend, APIs & Reactive UI",
+    subtitle: "Frontend, Async APIs & Reactive UI",
     summary:
-      "I build clean, responsive, and tactile web applications. I focus on performance, intuitive user experience, and zero-bloat code using modern React, modern CSS, and JavaScript. I care deeply about how software feels when interacted with.",
-    tags: ["React 19", "JavaScript", "Modern CSS", "Vite", "Node.js", "APIs"],
+      "I develop fast, minimalist, and responsive web platforms. My approach prioritizes high performance, zero superfluous bloat, and polished user interactions using modern React, vanilla CSS, and JavaScript. I care deeply about how digital tools feel when used.",
+    tags: ["React 19", "JavaScript", "Modern CSS", "Vite", "Node.js", "REST APIs"],
+    specs: [
+      { label: "Frontend Paradigm", value: "Component-driven, reactive UI" },
+      { label: "State & Data", value: "Async telemetry & API sync" },
+      { label: "Design System", value: "Borderless obsidian & glassmorphism" },
+    ],
   },
   {
     id: "hardware",
+    num: "02",
     title: "Embedded Systems & IoT",
-    subtitle: "ESP32, Arduino & Circuit Logic",
+    subtitle: "ESP32, Microcontrollers & Circuit Logic",
     summary:
-      "Hands-on with microcontrollers, breadboards, and electronic components. I program interrupt-driven firmware in C++ for ESP32 and Arduino boards, building physical security tripwires, sensor arrays, and wireless telemetry feeds.",
+      "Hands-on with microcontrollers, circuit schematics, and sensor peripherals. I write interrupt-driven firmware in C++ for ESP32 and Arduino boards, building physical laser security tripwires, automated relay controls, and wireless telemetry streams.",
     tags: ["ESP32", "Arduino", "Embedded C++", "Sensors", "Relays", "I2C / SPI / UART"],
+    specs: [
+      { label: "Primary SoC", value: "ESP-WROOM-32 (Dual Core 240MHz)" },
+      { label: "Firmware Toolchain", value: "PlatformIO & Arduino C++" },
+      { label: "Bus Protocols", value: "I2C, SPI, UART serial feeds" },
+    ],
   },
   {
     id: "robotics",
+    num: "03",
     title: "Robotics & Physical Automation",
-    subtitle: "Kinematics, SLAM & Telemetry",
+    subtitle: "Kinematics, SLAM & Sensor Streams",
     summary:
-      "Exploring mobile robotics using ROS 2 on Linux Mint. Working with LiDAR sensor streams, differential drive odometry, and automated spatial mapping for autonomous robotic navigation.",
+      "Developing robotics architectures on Linux Mint using ROS 2. Integrating LiDAR distance feeds, differential-drive wheel odometry, and automated spatial mapping for autonomous robotic navigation and obstacle avoidance.",
     tags: ["ROS 2", "Python", "LiDAR", "Kinematics", "SLAM", "FreeRTOS"],
+    specs: [
+      { label: "Robotics Framework", value: "ROS 2 Humble / Iron" },
+      { label: "Sensory Pipeline", value: "LiDAR Point Clouds + Sonar" },
+      { label: "Locomotion", value: "Differential Drive Kinematics" },
+    ],
   },
   {
     id: "environment",
-    title: "Dual-Boot Environment",
+    num: "04",
+    title: "Dual-Boot Engineering Workflow",
     subtitle: "Linux Mint & Windows 11",
     summary:
-      "Dual-booting Linux Mint and Windows 11. I leverage Linux for terminal agility, package compiling, and ROS nodes, switching to Windows for specialized hardware flashers and toolchains.",
+      "Running a dual-boot setup across Linux Mint and Windows 11. I leverage Linux for terminal agility, ROS nodes, and C++ compiling, while utilizing Windows for specialized hardware flashing utilities and CAD software.",
     tags: ["Linux Mint", "Windows 11", "Bash & Zsh", "Git / GitHub", "VS Code"],
+    specs: [
+      { label: "Primary OS", value: "Linux Mint 21.3 (Terminal Agility)" },
+      { label: "Secondary OS", value: "Windows 11 (Hardware Toolchains)" },
+      { label: "Shell & Shellcraft", value: "Zsh, Bash automation, Git" },
+    ],
   },
 ];
 
-const FAST_FACTS = [
-  { label: "Moniker", val: "Simplicity (Simple Minded Moron)", note: "Keeping systems straightforward and efficient" },
-  { label: "Operating Systems", val: "Linux Mint + Windows 11", note: "Balancing open-source terminal power and hardware tooling" },
-  { label: "Preferred Chipset", val: "ESP-WROOM-32", note: "Dual cores, FreeRTOS, Wi-Fi and Bluetooth" },
-  { label: "Philosophy", val: "Clean, Tactile, No Clutter", note: "Hardware and software that gets straight to work" },
-];
+const poshEase = [0.16, 1, 0.3, 1];
 
 function About() {
-  const [activePillarId, setActivePillarId] = useState("software");
-  const activePillar = PILLARS.find((p) => p.id === activePillarId) || PILLARS[0];
+  const [activeTab, setActiveTab] = useState(PILLARS[0].id);
+  const activePillar = PILLARS.find((p) => p.id === activeTab) || PILLARS[0];
 
   return (
     <section className="about-section" id="about">
       <motion.div
         className="about-container"
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+        viewport={{ once: true, amount: 0.12 }}
+        transition={{ duration: 0.5, ease: poshEase }}
       >
         {/* Section Header */}
         <div className="section-header-block">
@@ -67,85 +86,84 @@ function About() {
             <span>Focus Areas.</span>
           </h2>
           <p className="section-subtext">
-            I bridge software engineering and physical hardware.
-            I build both the logic running on the microcontroller and the interface displayed on the screen.
+            Bridging hardware and software engineering. I build the physical circuitry, write the low-level firmware, and design the interactive interface.
           </p>
         </div>
 
-        {/* Interactive Dual-Brain Showcase */}
-        <div className="about-interactive-layout">
-          {/* Pillar Selector Buttons */}
-          <div className="about-pillars-nav">
-            {PILLARS.map((pillar, idx) => (
-              <motion.button
+        {/* Unified Segmented Pillar Tabs */}
+        <div className="about-segmented-tabs">
+          {PILLARS.map((pillar) => {
+            const isActive = activeTab === pillar.id;
+            return (
+              <button
                 key={pillar.id}
                 type="button"
-                className={`about-pillar-btn ${activePillarId === pillar.id ? "active" : ""}`}
-                onClick={() => setActivePillarId(pillar.id)}
-                whileHover={{ x: 3 }}
-                whileTap={{ scale: 0.99 }}
-                transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                className={`about-segment-tab ${isActive ? "active" : ""}`}
+                onClick={() => setActiveTab(pillar.id)}
               >
-                <span className="pillar-num">{String(idx + 1).padStart(2, "0")}</span>
-                <div className="pillar-btn-text">
-                  <span className="pillar-title">{pillar.title}</span>
-                  <span className="pillar-sub">{pillar.subtitle}</span>
-                </div>
-                <span className="pillar-arrow">→</span>
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Active Pillar Card with Smooth AnimatePresence Switch */}
-          <div className="about-pillar-display">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activePillar.id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ type: "spring", stiffness: 180, damping: 22 }}
-                className="pillar-animated-content"
-              >
-                <div className="display-card-top">
-                  <div>
-                    <span className="display-kicker">FOCUS</span>
-                    <h3 className="display-title">{activePillar.title}</h3>
-                    <span className="display-subtitle">{activePillar.subtitle}</span>
-                  </div>
-                </div>
-
-                <p className="display-summary">{activePillar.summary}</p>
-
-                <div className="display-tags-group">
-                  <span className="display-tags-label">CORE TECHNOLOGIES:</span>
-                  <div className="display-tags">
-                    {activePillar.tags.map((tag) => (
-                      <span key={tag} className="display-tag-chip">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                {isActive && (
+                  <motion.div
+                    layoutId="activePillarGlider"
+                    className="segment-tab-glider"
+                    transition={{ duration: 0.26, ease: poshEase }}
+                  />
+                )}
+                <span className="tab-num">{pillar.num}</span>
+                <span className="tab-title">{pillar.title.split("&")[0].trim()}</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Fast Facts Grid */}
-        <div className="fast-facts-row">
-          {FAST_FACTS.map((fact, idx) => (
+        {/* Unified Architectural Showcase Card */}
+        <div className="about-showcase-card">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={idx}
-              className="fact-card"
-              whileHover={{ y: -3 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              key={activePillar.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: poshEase }}
+              className="showcase-content-body"
             >
-              <span className="fact-label">{fact.label}</span>
-              <span className="fact-val">{fact.val}</span>
-              <span className="fact-note">{fact.note}</span>
+              {/* Header inside card */}
+              <div className="showcase-header">
+                <div>
+                  <div className="showcase-kicker">
+                    <span>FOCUS AREA {activePillar.num}</span>
+                    <span className="kicker-sep">•</span>
+                    <span>{activePillar.subtitle}</span>
+                  </div>
+                  <h3 className="showcase-title">{activePillar.title}</h3>
+                </div>
+              </div>
+
+              {/* Narrative Summary */}
+              <p className="showcase-summary">{activePillar.summary}</p>
+
+              {/* Technologies row */}
+              <div className="showcase-tech-row">
+                <span className="showcase-tech-label">CORE TECHNOLOGIES</span>
+                <div className="showcase-tags">
+                  {activePillar.tags.map((tag) => (
+                    <span key={tag} className="showcase-chip">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Telemetry / Technical Specs */}
+              <div className="showcase-specs-grid">
+                {activePillar.specs.map((spec, idx) => (
+                  <div key={idx} className="spec-item">
+                    <span className="spec-label">{spec.label}</span>
+                    <span className="spec-val">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
         </div>
       </motion.div>
     </section>

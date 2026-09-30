@@ -1,40 +1,18 @@
-import { useRef } from "react";
-
 function ProjectCard({ project, index, onSelect }) {
-  const cardRef = useRef(null);
-  const rafId = useRef(null);
   const formattedIndex = String(index + 1).padStart(2, "0");
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    if (rafId.current) cancelAnimationFrame(rafId.current);
-    rafId.current = requestAnimationFrame(() => {
-      if (!cardRef.current) return;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -4;
-      const rotateY = ((x - centerX) / centerX) * 4;
-      cardRef.current.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
-    });
-  };
-
-  const handleMouseLeave = () => {
-    if (rafId.current) cancelAnimationFrame(rafId.current);
-    if (!cardRef.current) return;
-    cardRef.current.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)";
-  };
 
   return (
     <div
-      ref={cardRef}
       className="interactive-project-card"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       onClick={() => onSelect(project)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelect(project);
+        }
+      }}
     >
       {/* Card Image Thumbnail */}
       <div className="card-image-wrap">
@@ -44,7 +22,7 @@ function ProjectCard({ project, index, onSelect }) {
           className="card-project-img"
           loading="lazy"
         />
-        <div className="card-image-gradient"></div>
+        <div className="card-image-gradient" />
         <div className="card-top-badges">
           <span className="card-index-badge">{formattedIndex}</span>
           <span className="card-category-badge">{project.category}</span>
@@ -60,19 +38,7 @@ function ProjectCard({ project, index, onSelect }) {
 
         <p className="card-summary">{project.description}</p>
 
-        {/* Minimalist Stats preview */}
-        {project.stats && (
-          <div className="card-stats-preview">
-            {project.stats.slice(0, 2).map((s, idx) => (
-              <div key={idx} className="card-stat-pill">
-                <span className="stat-pill-val">{s.value}</span>
-                <span className="stat-pill-lbl">{s.label}</span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Minimalist Tech tags */}
+        {/* Minimalist Tech Tags */}
         {project.tags && (
           <div className="card-tags-list">
             {project.tags.slice(0, 3).map((tag) => (
@@ -86,7 +52,7 @@ function ProjectCard({ project, index, onSelect }) {
           </div>
         )}
 
-        {/* Card Action footer */}
+        {/* Card Action Link */}
         <div className="card-action-bar">
           <span className="card-cta-label">Inspect Architecture</span>
           <span className="card-cta-arrow">→</span>

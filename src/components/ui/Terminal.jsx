@@ -17,17 +17,19 @@ const SUGGESTED_COMMANDS = [
   "clear",
 ];
 
+const poshEase = [0.16, 1, 0.3, 1];
+
 function Terminal() {
   const [history, setHistory] = useState(INITIAL_LINES);
   const [inputVal, setInputVal] = useState("");
   const [cmdIndex, setCmdIndex] = useState(-1);
   const [commandHistory, setCommandHistory] = useState([]);
-  const terminalEndRef = useRef(null);
+  const terminalBodyRef = useRef(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
-    if (terminalEndRef.current) {
-      terminalEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
     }
   }, [history]);
 
@@ -187,10 +189,10 @@ Dual-boots Linux Mint & Windows 11.`,
     <section className="terminal-section" id="terminal">
       <motion.div
         className="terminal-container"
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+        viewport={{ once: true, amount: 0.12 }}
+        transition={{ duration: 0.5, ease: poshEase }}
       >
         <div className="section-header-block">
           <div className="section-pill">
@@ -234,9 +236,9 @@ Dual-boots Linux Mint & Windows 11.`,
                   e.stopPropagation();
                   runCommand(cmd);
                 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.15, ease: poshEase }}
               >
                 ${cmd}
               </motion.button>
@@ -244,7 +246,7 @@ Dual-boots Linux Mint & Windows 11.`,
           </div>
 
           {/* Output log */}
-          <div className="terminal-body">
+          <div className="terminal-body" ref={terminalBodyRef}>
             {history.map((line, idx) => (
               <div key={idx} className={`terminal-line ${line.type}`}>
                 {line.type === "ascii" ? (
@@ -254,7 +256,6 @@ Dual-boots Linux Mint & Windows 11.`,
                 )}
               </div>
             ))}
-            <div ref={terminalEndRef} />
           </div>
 
           {/* Prompt input row */}

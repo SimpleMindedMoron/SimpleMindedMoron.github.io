@@ -10,6 +10,8 @@ const PRESET_TOPICS = [
   "General Inquiries",
 ];
 
+const poshEase = [0.16, 1, 0.3, 1];
+
 function Contact() {
   const [selectedTopic, setSelectedTopic] = useState(PRESET_TOPICS[0]);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -56,10 +58,10 @@ function Contact() {
     <section className="contact-section" id="contact">
       <motion.div
         className="contact-container"
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+        viewport={{ once: true, amount: 0.12 }}
+        transition={{ duration: 0.5, ease: poshEase }}
       >
         {/* Section Header */}
         <div className="section-header-block">
@@ -102,8 +104,9 @@ function Contact() {
                   className={`copy-btn ${copiedEmail ? "copied" : ""}`}
                   onClick={handleCopy}
                   aria-label="Copy email address"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.15, ease: poshEase }}
                 >
                   {copiedEmail ? "Copied" : "Copy"}
                 </motion.button>
@@ -119,8 +122,8 @@ function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-btn-card"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                  whileHover={{ x: 2 }}
+                  transition={{ duration: 0.2, ease: poshEase }}
                 >
                   <img src={linkedinIcon} alt="LinkedIn" className="social-btn-icon" />
                   <div className="social-btn-info">
@@ -135,8 +138,8 @@ function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-btn-card"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                  whileHover={{ x: 2 }}
+                  transition={{ duration: 0.2, ease: poshEase }}
                 >
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
                     <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.02 11.02 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.08.78 2.17 0 1.57-.01 2.83-.01 3.22 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z" />
@@ -153,8 +156,8 @@ function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-btn-card"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                  whileHover={{ x: 2 }}
+                  transition={{ duration: 0.2, ease: poshEase }}
                 >
                   <img src={instagramIcon} alt="Instagram" className="social-btn-icon" />
                   <div className="social-btn-info">
@@ -174,25 +177,34 @@ function Contact() {
 
             {/* Topic pills */}
             <div className="preset-topics-wrap">
-              {PRESET_TOPICS.map((topic) => (
-                <motion.button
-                  key={topic}
-                  type="button"
-                  className={`preset-topic-btn ${selectedTopic === topic ? "selected" : ""}`}
-                  onClick={() => setSelectedTopic(topic)}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  {topic}
-                </motion.button>
-              ))}
+              {PRESET_TOPICS.map((topic) => {
+                const isSelected = selectedTopic === topic;
+                return (
+                  <button
+                    key={topic}
+                    type="button"
+                    className={`preset-topic-btn ${isSelected ? "selected" : ""}`}
+                    onClick={() => setSelectedTopic(topic)}
+                  >
+                    {isSelected && (
+                      <motion.div
+                        layoutId="activeTopicGlider"
+                        className="topic-btn-glider"
+                        transition={{ duration: 0.26, ease: poshEase }}
+                      />
+                    )}
+                    <span className="topic-text">{topic}</span>
+                  </button>
+                );
+              })}
             </div>
 
             {isSent ? (
               <motion.div
                 className="form-success-banner"
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.25, ease: poshEase }}
               >
                 <h4>Message Dispatched</h4>
                 <p>Thanks for reaching out. I will respond to your note shortly.</p>
@@ -247,9 +259,9 @@ function Contact() {
                   type="submit"
                   className="form-submit-btn"
                   disabled={isSubmitting}
-                  whileHover={{ y: -2, scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 20 }}
+                  whileHover={{ y: -1.5 }}
+                  whileTap={{ scale: 0.985 }}
+                  transition={{ duration: 0.15, ease: poshEase }}
                 >
                   {isSubmitting ? (
                     <span>Sending...</span>

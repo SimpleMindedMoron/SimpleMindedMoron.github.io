@@ -4,6 +4,8 @@ import { projects, categories } from "../../data/projectsData";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 
+const poshEase = [0.16, 1, 0.3, 1];
+
 function Work() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,10 +27,10 @@ function Work() {
     <section className="work-section" id="work">
       <motion.div
         className="work-container"
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
-        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+        transition={{ duration: 0.5, ease: poshEase }}
       >
         {/* Section Header */}
         <div className="section-header-block">
@@ -57,18 +59,22 @@ function Work() {
                   : projects.filter((p) => p.category === cat.id).length;
               const isActive = selectedCategory === cat.id;
               return (
-                <motion.button
+                <button
                   key={cat.id}
                   type="button"
                   className={`category-tab-btn ${isActive ? "active" : ""}`}
                   onClick={() => setSelectedCategory(cat.id)}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
-                  <span>{cat.label}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeCategoryGlider"
+                      className="category-tab-glider"
+                      transition={{ duration: 0.26, ease: poshEase }}
+                    />
+                  )}
+                  <span className="tab-label">{cat.label}</span>
                   <span className="tab-count-badge">{count}</span>
-                </motion.button>
+                </button>
               );
             })}
           </div>
@@ -94,7 +100,10 @@ function Work() {
                 onClick={() => setSearchQuery("")}
                 aria-label="Clear search"
               >
-                ✕
+                <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" strokeWidth="2.5" fill="none">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
               </button>
             )}
           </div>
@@ -108,10 +117,10 @@ function Work() {
                 <motion.div
                   key={project.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.96 }}
+                  initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ type: "spring", stiffness: 220, damping: 22 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.28, ease: poshEase }}
                 >
                   <ProjectCard
                     project={project}

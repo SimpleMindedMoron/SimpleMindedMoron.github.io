@@ -1,9 +1,18 @@
 
-function Socials(props) {
+function Socials({ link, imgURL, alt, children }) {
   return (
     <div className="social-container">
-      <a href={props.link}>
-        <img src={props.imgURL} className="social-img" alt={props.alt} />
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={alt || "Social link"}
+      >
+        {children ? (
+          children
+        ) : (
+          <img src={imgURL} className="social-img" alt={alt || "social"} />
+        )}
       </a>
     </div>
   );
