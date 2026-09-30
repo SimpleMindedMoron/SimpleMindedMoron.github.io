@@ -25,31 +25,49 @@ function Work() {
 
   return (
     <section className="work-section" id="work">
-      <motion.div
-        className="work-container"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.5, ease: poshEase }}
-      >
-        {/* Section Header */}
+      <div className="work-container">
+        {/* Section Header with Staggered Text Reveals */}
         <div className="section-header-block">
-          <div className="section-pill">
+          <motion.div
+            className="section-pill"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, ease: poshEase }}
+          >
             <span className="pill-dot minimal"></span>
             <span>PORTFOLIO</span>
-          </div>
-          <h2 className="section-heading">
+          </motion.div>
+          <motion.h2
+            className="section-heading"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.08, ease: poshEase }}
+          >
             Selected Works & <br />
             <span>Systems.</span>
-          </h2>
-          <p className="section-subtext">
+          </motion.h2>
+          <motion.p
+            className="section-subtext"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.16, ease: poshEase }}
+          >
             Hardware builds, embedded sensor networks, and full-stack software applications.
             Select any item to inspect its technical architecture.
-          </p>
+          </motion.p>
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="work-controls-bar">
+        <motion.div
+          className="work-controls-bar"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.5, delay: 0.22, ease: poshEase }}
+        >
           {/* Category Tabs */}
           <div className="category-tabs">
             {categories.map((cat) => {
@@ -107,7 +125,7 @@ function Work() {
               </button>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* Projects Grid with AnimatePresence & Layout physics */}
         {filteredProjects.length > 0 ? (
@@ -155,7 +173,7 @@ function Work() {
             </button>
           </motion.div>
         )}
-      </motion.div>
+      </div>
 
       {/* Modal Dialog with AnimatePresence */}
       <AnimatePresence>

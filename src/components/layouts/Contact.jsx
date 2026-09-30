@@ -56,32 +56,50 @@ function Contact() {
 
   return (
     <section className="contact-section" id="contact">
-      <motion.div
-        className="contact-container"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.12 }}
-        transition={{ duration: 0.5, ease: poshEase }}
-      >
-        {/* Section Header */}
+      <div className="contact-container">
+        {/* Section Header with Staggered Text Reveals */}
         <div className="section-header-block">
-          <div className="section-pill">
+          <motion.div
+            className="section-pill"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, ease: poshEase }}
+          >
             <span className="pill-dot minimal"></span>
             <span>GET IN TOUCH</span>
-          </div>
-          <h2 className="section-heading">
+          </motion.div>
+          <motion.h2
+            className="section-heading"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.08, ease: poshEase }}
+          >
             Connect & <br />
             <span>Collaboration.</span>
-          </h2>
-          <p className="section-subtext">
+          </motion.h2>
+          <motion.p
+            className="section-subtext"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.16, ease: poshEase }}
+          >
             For software roles, hardware prototyping, or embedded systems discussions.
-          </p>
+          </motion.p>
         </div>
 
         {/* Contact Layout Grid */}
         <div className="contact-layout-grid">
           {/* Left Column: Direct Info & Socials */}
-          <div className="contact-info-card">
+          <motion.div
+            className="contact-info-card"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: 0.22, ease: poshEase }}
+          >
             <div className="info-header">
               <span className="info-title">Availability</span>
               <div className="ist-time-pill">
@@ -168,10 +186,16 @@ function Contact() {
                 </motion.a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Form */}
-          <div className="contact-form-card">
+          <motion.div
+            className="contact-form-card"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: 0.28, ease: poshEase }}
+          >
             <h3 className="form-card-title">Direct Dispatch</h3>
             <p className="form-card-sub">Select a category or write a message:</p>
 
@@ -274,9 +298,9 @@ function Contact() {
                 </motion.button>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

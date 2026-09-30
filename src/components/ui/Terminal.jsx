@@ -187,29 +187,49 @@ Dual-boots Linux Mint & Windows 11.`,
 
   return (
     <section className="terminal-section" id="terminal">
-      <motion.div
-        className="terminal-container"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.12 }}
-        transition={{ duration: 0.5, ease: poshEase }}
-      >
+      <div className="terminal-container">
+        {/* Section Header with Staggered Text Reveals */}
         <div className="section-header-block">
-          <div className="section-pill">
+          <motion.div
+            className="section-pill"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, ease: poshEase }}
+          >
             <span className="pill-dot minimal"></span>
             <span>CLI INTERFACE</span>
-          </div>
-          <h2 className="section-heading">
+          </motion.div>
+          <motion.h2
+            className="section-heading"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.08, ease: poshEase }}
+          >
             Command Center & <br />
             <span>Terminal.</span>
-          </h2>
-          <p className="section-subtext">
+          </motion.h2>
+          <motion.p
+            className="section-subtext"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.16, ease: poshEase }}
+          >
             For terminal workflows: run commands directly to inspect environment, skills, and projects.
-          </p>
+          </motion.p>
         </div>
 
         {/* The Window Box */}
-        <div className="terminal-box" onClick={() => inputRef.current?.focus()}>
+        <motion.div
+          className="terminal-box"
+          onClick={() => inputRef.current?.focus()}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.55, delay: 0.22, ease: poshEase }}
+        >
           {/* Title Bar */}
           <div className="terminal-bar">
             <div className="terminal-dots">
@@ -273,8 +293,8 @@ Dual-boots Linux Mint & Windows 11.`,
               spellCheck="false"
             />
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

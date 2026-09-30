@@ -19,19 +19,56 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.07,
-      delayChildren: 0.08,
+      staggerChildren: 0.08,
+      delayChildren: 0.06,
     },
   },
 };
 
-const itemVariants = {
+const badgeVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: poshEase,
+    },
+  },
+};
+
+const textFadeUpVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.52,
+      ease: poshEase,
+    },
+  },
+};
+
+const headlineLineVariants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.62,
+      ease: poshEase,
+    },
+  },
+};
+
+const metricsRowVariants = {
   hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.48,
+      duration: 0.55,
+      delay: 0.35,
       ease: poshEase,
     },
   },
@@ -87,37 +124,46 @@ function Hero() {
         animate="visible"
       >
         {/* Minimal Refined Status Badge */}
-        <motion.div className="hero-badge-wrap" variants={itemVariants}>
+        <motion.div className="hero-badge-wrap" variants={badgeVariants}>
           <div className="hero-status-pill">
             <span className="status-live-dot"></span>
             <span>Available for engineering & hardware roles &bull; Bangalore</span>
           </div>
         </motion.div>
 
-        {/* Hero Title & Lead */}
-        <div className="hero-content">
-          <motion.span className="hero-eyebrow" variants={itemVariants}>
+        {/* Hero Title & Lead with Staggered Line-by-Line Onload Text Reveals */}
+        <motion.div
+          className="hero-content"
+          initial="hidden"
+          animate="visible"
+          transition={{ staggerChildren: 0.08, delayChildren: 0.12 }}
+        >
+          <motion.span className="hero-eyebrow" variants={textFadeUpVariants}>
             ARJUN SANESH &bull; SIMPLICITY
           </motion.span>
 
-          <motion.h1 className="hero-headline" variants={itemVariants}>
-            Engineering at the intersection of <br />
-            <span className="hero-headline-highlight">Software, Hardware & Systems.</span>
-          </motion.h1>
+          <h1 className="hero-headline">
+            <motion.span className="headline-line" variants={headlineLineVariants}>
+              Engineering at the intersection of
+            </motion.span>
+            <motion.span className="headline-line hero-headline-highlight" variants={headlineLineVariants}>
+              Software, Hardware & Systems.
+            </motion.span>
+          </h1>
 
-          <motion.p className="hero-lead-text" variants={itemVariants}>
+          <motion.p className="hero-lead-text" variants={textFadeUpVariants}>
             Building clean web applications, embedded firmware (ESP32/Arduino), and robotics. Dual-boot workflow on Linux Mint & Windows 11.
           </motion.p>
 
           {/* Minimalist Dynamic Role Box */}
-          <motion.div className="dynamic-role-box" variants={itemVariants}>
+          <motion.div className="dynamic-role-box" variants={textFadeUpVariants}>
             <span className="role-prefix">&gt; </span>
             <span className="role-typed-text">{displayText}</span>
             <span className="cursor-blink">_</span>
           </motion.div>
 
           {/* Clean Minimal Actions */}
-          <motion.div className="hero-actions" variants={itemVariants}>
+          <motion.div className="hero-actions" variants={textFadeUpVariants}>
             <motion.button
               type="button"
               className="btn-minimal-primary"
@@ -154,7 +200,7 @@ function Hero() {
           </motion.div>
 
           {/* Minimal Metrics Row */}
-          <motion.div className="hero-metrics-bar" variants={itemVariants}>
+          <motion.div className="hero-metrics-bar" variants={metricsRowVariants}>
             <div className="hero-metric-item">
               <span className="metric-val">3+</span>
               <span className="metric-lbl">Years Building</span>
@@ -194,7 +240,7 @@ function Hero() {
               </div>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </motion.div>
     </main>
   );

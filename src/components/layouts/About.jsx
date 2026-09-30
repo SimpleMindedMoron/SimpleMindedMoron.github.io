@@ -68,30 +68,48 @@ function About() {
 
   return (
     <section className="about-section" id="about">
-      <motion.div
-        className="about-container"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.12 }}
-        transition={{ duration: 0.5, ease: poshEase }}
-      >
-        {/* Section Header */}
+      <div className="about-container">
+        {/* Section Header with Staggered Text Reveals */}
         <div className="section-header-block">
-          <div className="section-pill">
+          <motion.div
+            className="section-pill"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, ease: poshEase }}
+          >
             <span className="pill-dot minimal"></span>
             <span>OVERVIEW & BACKGROUND</span>
-          </div>
-          <h2 className="section-heading">
+          </motion.div>
+          <motion.h2
+            className="section-heading"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.08, ease: poshEase }}
+          >
             Background & <br />
             <span>Focus Areas.</span>
-          </h2>
-          <p className="section-subtext">
+          </motion.h2>
+          <motion.p
+            className="section-subtext"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.16, ease: poshEase }}
+          >
             Bridging hardware and software engineering. I build the physical circuitry, write the low-level firmware, and design the interactive interface.
-          </p>
+          </motion.p>
         </div>
 
         {/* Unified Segmented Pillar Tabs */}
-        <div className="about-segmented-tabs">
+        <motion.div
+          className="about-segmented-tabs"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.22, ease: poshEase }}
+        >
           {PILLARS.map((pillar) => {
             const isActive = activeTab === pillar.id;
             return (
@@ -113,10 +131,16 @@ function About() {
               </button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Unified Architectural Showcase Card */}
-        <div className="about-showcase-card">
+        <motion.div
+          className="about-showcase-card"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.55, delay: 0.28, ease: poshEase }}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={activePillar.id}
@@ -164,8 +188,8 @@ function About() {
               </div>
             </motion.div>
           </AnimatePresence>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

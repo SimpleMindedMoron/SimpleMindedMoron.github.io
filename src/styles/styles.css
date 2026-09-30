@@ -188,10 +188,77 @@ body {
   background: radial-gradient(circle at 50% 0%, #101016 0%, #070709 60%, #040406 100%);
 }
 
-/* Ambient and interactive background orbs (strictly no glow) */
-.ambient-gradient-orb,
+/* Floating harmonic ambient gradient orbs */
+.ambient-gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.ambient-gradient-orb.sapphire-orb {
+  top: -140px;
+  left: 10%;
+  width: 740px;
+  height: 740px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(99, 102, 241, 0.08) 38%,
+    rgba(14, 165, 233, 0.02) 65%,
+    transparent 80%
+  );
+  filter: blur(120px);
+}
+
+.ambient-gradient-orb.violet-orb {
+  bottom: -120px;
+  right: 6%;
+  width: 780px;
+  height: 780px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.13) 0%,
+    rgba(99, 102, 241, 0.07) 42%,
+    rgba(236, 72, 153, 0.02) 68%,
+    transparent 80%
+  );
+  filter: blur(130px);
+}
+
+/* Interactive cursor spring-following physics glows */
 .interactive-physics-glow {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 650px;
+  height: 650px;
+  margin-top: -325px;
+  margin-left: -325px;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.interactive-physics-glow.primary-glow {
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.16) 0%,
+    rgba(56, 189, 248, 0.08) 38%,
+    rgba(147, 51, 234, 0.02) 60%,
+    transparent 75%
+  );
+  filter: blur(85px);
+}
+
+.interactive-physics-glow.secondary-glow {
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.08) 0%,
+    rgba(59, 130, 246, 0.04) 45%,
+    transparent 75%
+  );
+  filter: blur(100px);
 }
 
 /* Dynamic dot grids */
@@ -199,14 +266,14 @@ body {
   position: absolute;
   inset: 0;
   background-image: radial-gradient(
-    rgba(255, 255, 255, 0.15) 1px,
+    rgba(255, 255, 255, 0.14) 1px,
     transparent 1px
   );
   background-size: 26px 26px;
 }
 
 .minimalist-dot-grid.base-grid {
-  opacity: 0.15;
+  opacity: 0.16;
   mask-image: radial-gradient(
     ellipse at 50% 30%,
     rgba(0, 0, 0, 1) 0%,
@@ -222,13 +289,13 @@ body {
 }
 
 .minimalist-dot-grid.interactive-light-grid {
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .ambient-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(7, 7, 9, 0.7) 100%);
+  background: radial-gradient(circle at 50% 50%, transparent 55%, rgba(7, 7, 9, 0.75) 100%);
   pointer-events: none;
 }
 
@@ -574,6 +641,10 @@ body {
   letter-spacing: -0.03em;
   color: #ffffff;
   margin-bottom: 14px;
+}
+
+.headline-line {
+  display: block;
 }
 
 .hero-headline-highlight {
