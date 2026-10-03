@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
 const INITIAL_LINES = [
-  { type: "system", text: "SIMPLICITY_OS COMMAND SHELL v98.4" },
+  { type: "system", text: "SYSTEM COMMAND SHELL // v2.0" },
   { type: "hint", text: "Type 'help' or click shortcuts below to query system:" },
 ];
 
@@ -28,7 +28,7 @@ function Terminal() {
     setCommandHistory((prev) => [...prev, rawCmd]);
     setCmdIndex(-1);
 
-    const newEntries = [{ type: "prompt", text: `arjun@simplicity:~$ ${rawCmd}` }];
+    const newEntries = [{ type: "prompt", text: `arjun@portfolio:~$ ${rawCmd}` }];
 
     switch (cmd) {
       case "help":
@@ -39,7 +39,7 @@ function Terminal() {
   • skills    - Technical toolkit & language stack
   • hardware  - Microcontrollers, sensors & robotics
   • projects  - Software applications & hardware builds
-  • contact   - Profiles & direct email
+  • contact   - Profiles & communication channels
   • clear     - Clear terminal buffer`,
         });
         break;
@@ -47,8 +47,8 @@ function Terminal() {
       case "whoami":
         newEntries.push({
           type: "output",
-          text: `Arjun Sanesh (@Simplicity005)
-Software & Embedded Systems Engineer based in Bangalore, India.
+          text: `Arjun Sanesh (@Simplemindedmoron)
+Software & Embedded Systems Engineer.
 Dual-boot workflow: Linux Mint + Windows 11.`,
         });
         break;
@@ -84,9 +84,9 @@ sensor ADC conversions, and differential-drive ROS 2 robotics chassis.`,
       case "contact":
         newEntries.push({
           type: "output",
-          text: `Email:    arjunsanesh@gmail.com
+          text: `Message:  Use Contact dispatch form below
 LinkedIn: linkedin.com/in/arjun-sanesh/
-GitHub:   github.com/Simplicity005`,
+GitHub:   github.com/Simplemindedmoron`,
         });
         break;
 
@@ -146,12 +146,7 @@ GitHub:   github.com/Simplicity005`,
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
               <span className="neo-titlebar-icon">📟</span>
-              <span className="neo-titlebar-text">COMMAND_PROMPT // SHELL</span>
-            </div>
-            <div className="neo-titlebar-controls">
-              <span className="neo-win-btn">_</span>
-              <span className="neo-win-btn">□</span>
-              <span className="neo-win-btn close">✕</span>
+              <span className="neo-titlebar-text">terminal.exe</span>
             </div>
           </div>
 

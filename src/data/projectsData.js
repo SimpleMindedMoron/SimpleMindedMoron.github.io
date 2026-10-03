@@ -2,7 +2,7 @@ import optimizationImage from "../assets/images/Optimization_Modelling.png";
 import roboticsImage from "../assets/images/ROS_Robotics.jpg";
 
 export const categories = [
-  { id: "all", label: "All Works" },
+  { id: "all", label: "All Projects" },
   { id: "hardware", label: "Hardware & Embedded" },
   { id: "software", label: "Software & Systems" },
 ];
@@ -30,7 +30,7 @@ export const projects = [
       "Inter-board serial communication between Arduino Uno and ESP32",
       "Status relay actuation with fail-safe power isolation",
     ],
-    github: "https://github.com/Simplicity005",
+    github: "https://github.com/Simplemindedmoron",
     year: "2024",
   },
   {
@@ -55,7 +55,7 @@ export const projects = [
       "Pareto frontier evaluation and parameter sweeps",
       "Automated heatmaps and route density plotting",
     ],
-    github: "https://github.com/Simplicity005",
+    github: "https://github.com/Simplemindedmoron",
     year: "2024",
   },
   {
@@ -80,7 +80,7 @@ export const projects = [
       "Differential drive velocity publisher via geometry_msgs/Twist",
       "Real-time sensor telemetry logging and diagnostics",
     ],
-    github: "https://github.com/Simplicity005",
+    github: "https://github.com/Simplemindedmoron",
     year: "2024",
   },
   {
@@ -105,7 +105,7 @@ export const projects = [
       "Multiplexed LED indicators showing bay availability",
       "Serial diagnostic stream for central monitoring",
     ],
-    github: "https://github.com/Simplicity005",
+    github: "https://github.com/Simplemindedmoron",
     year: "2023",
   },
   {
@@ -130,7 +130,7 @@ export const projects = [
       "Integrated fluid Motion physics transitions and interactive terminal",
       "Fluid responsive layout for mobile, tablet, and widescreen",
     ],
-    github: "https://github.com/Simplicity005/Simplicity005.github.io",
+    github: "https://github.com/Simplemindedmoron/Simplemindedmoron.github.io",
     year: "2025",
   },
 ];

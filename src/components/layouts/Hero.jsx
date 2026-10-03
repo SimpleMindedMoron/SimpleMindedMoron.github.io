@@ -1,7 +1,4 @@
 import { useState, useEffect } from "react";
-import Socials from "../ui/Socials";
-import linkedinIcon from "../../assets/images/linkedin.png";
-import instagramIcon from "../../assets/images/instagram.png";
 
 const ROLES = [
   "Full-Stack Web Developer",
@@ -15,7 +12,7 @@ function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [isNameHovered, setIsNameHovered] = useState(false);
 
   useEffect(() => {
     const currentRole = ROLES[roleIndex];
@@ -46,50 +43,43 @@ function Hero() {
     }
   };
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText("arjunsanesh@gmail.com");
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2200);
-  };
-
   return (
     <main className="hero-section" id="hero">
       <div className="hero-container">
-        {/* Windows 98 / Vintage Application Window */}
+        {/* Windows 98 / Retro Window */}
         <div className="neo-window hero-window">
-          {/* Titlebar */}
+          {/* Titlebar: main.exe without window controls */}
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
               <span className="neo-titlebar-icon">💻</span>
-              <span className="neo-titlebar-text">SIMPLICITY_OS // ARJUN_SANESH.EXE</span>
-            </div>
-            <div className="neo-titlebar-controls">
-              <span className="neo-win-btn" title="Minimize">_</span>
-              <span className="neo-win-btn" title="Maximize">□</span>
-              <span className="neo-win-btn close" title="Close">✕</span>
+              <span className="neo-titlebar-text">main.exe</span>
             </div>
           </div>
 
           <div className="hero-window-inner">
             <div className="hero-content">
-              {/* Minimal Single Kicker */}
-              <div className="hero-kicker-strip">
-                <span className="kicker-tag">ARJUN SANESH</span>
-                <span className="kicker-sep">&bull;</span>
-                <span>BANGALORE, INDIA</span>
-                <span className="kicker-sep">&bull;</span>
-                <span className="kicker-status">AVAILABLE FOR ROLES</span>
-              </div>
-
-              {/* Clean Headline */}
-              <h1 className="hero-headline">
-                Engineering at the intersection of <br />
-                <span className="hero-headline-highlight">Software, Hardware &amp; Systems.</span>
+              {/* Front and Center Name with GitHub Hover Transformation */}
+              <h1 className="hero-headline hero-name-heading">
+                Hi! I am{" "}
+                <a
+                  href="https://github.com/Simplemindedmoron"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hero-name-link"
+                  onMouseEnter={() => setIsNameHovered(true)}
+                  onMouseLeave={() => setIsNameHovered(false)}
+                  title="Visit GitHub @Simplemindedmoron"
+                >
+                  <span className="hero-name-text">
+                    {isNameHovered ? "Simplemindedmoron" : "Arjun Sanesh"}
+                  </span>
+                  <span className="hero-name-arrow">↗</span>
+                </a>
               </h1>
 
               {/* Short Bio */}
               <p className="hero-lead-text">
-                Building responsive web platforms, microcontroller firmware (ESP32/Arduino), and robotics. Dual-boot workflow on Linux Mint &amp; Windows 11.
+                Building responsive web platforms, microcontroller firmware (ESP32/Arduino), and robotics.
               </p>
 
               {/* Compact Typing Prompt */}
@@ -99,14 +89,14 @@ function Hero() {
                 <span className="cursor-blink">_</span>
               </div>
 
-              {/* Toned-down Action Buttons */}
+              {/* Clean Action Buttons */}
               <div className="hero-actions">
                 <button
                   type="button"
                   className="neo-btn neo-btn-teal"
                   onClick={() => scrollTo("work")}
                 >
-                  <span>Selected Works</span>
+                  <span>Projects</span>
                   <span className="btn-arrow">→</span>
                 </button>
 
@@ -118,17 +108,9 @@ function Hero() {
                   <span>Terminal CLI</span>
                   <span className="btn-arrow">&gt;_</span>
                 </button>
-
-                <button
-                  type="button"
-                  className="neo-btn neo-btn-outline"
-                  onClick={handleCopyEmail}
-                >
-                  <span>{copiedEmail ? "Copied ✓" : "Copy Email"}</span>
-                </button>
               </div>
 
-              {/* Compact Metrics Row */}
+              {/* Proportional Metrics Bar */}
               <div className="hero-metrics-bar">
                 <div className="hero-metric-item">
                   <span className="metric-val">3+</span>
@@ -144,25 +126,49 @@ function Hero() {
                 </div>
                 <div className="hero-metric-item social-metric-item">
                   <span className="metric-lbl">Links</span>
-                  <div className="socials-group">
-                    <Socials
-                      link="https://www.linkedin.com/in/arjun-sanesh/"
-                      imgURL={linkedinIcon}
-                      alt="LinkedIn"
-                    />
-                    <Socials
-                      link="https://github.com/Simplicity005"
-                      alt="GitHub"
+                  <div className="hero-social-strip">
+                    <a
+                      href="https://github.com/Simplemindedmoron"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hero-social-pill"
+                      title="GitHub: @Simplemindedmoron"
+                      aria-label="GitHub Profile"
                     >
-                      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
-                        <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.02 11.02 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.08.78 2.17 0 1.57-.01 2.83-.01 3.22 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z" />
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                        />
                       </svg>
-                    </Socials>
-                    <Socials
-                      link="https://www.instagram.com"
-                      imgURL={instagramIcon}
-                      alt="Instagram"
-                    />
+                      <span>GitHub</span>
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/arjun-sanesh/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hero-social-pill"
+                      title="LinkedIn: Arjun Sanesh"
+                      aria-label="LinkedIn Profile"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                      </svg>
+                      <span>LinkedIn</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -175,3 +181,4 @@ function Hero() {
 }
 
 export default Hero;
+

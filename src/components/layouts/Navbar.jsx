@@ -4,13 +4,13 @@ import logo from "../../assets/Logo.png";
 
 const desktopNavItems = [
   { label: "About", href: "#about" },
-  { label: "Works", href: "#work" },
+  { label: "Projects", href: "#work" },
   { label: "Terminal", href: "#terminal" },
 ];
 
 const mobileNavItems = [
   { label: "About", href: "#about" },
-  { label: "Works", href: "#work" },
+  { label: "Projects", href: "#work" },
   { label: "Terminal", href: "#terminal" },
   { label: "Contact", href: "#contact" },
 ];
@@ -71,42 +71,39 @@ function Navbar() {
   return (
     <header className={`navbar-wrapper ${isScrolled ? "is-scrolled" : ""}`} id="main-nav">
       <nav className="navbar-pill">
-        {/* Brand */}
+        {/* Brand: Logo Only */}
         <div className="nav-brand">
           <a
             href="/"
             onClick={(e) => scrollToSection(e, "hero")}
             className="brand-link"
-            aria-label="Go to Top"
+            aria-label="Home"
+            title="Arjun Sanesh Portfolio"
           >
-            <div className="nav-start-chip">
-              <span>SIMPLICITY.98</span>
-            </div>
-            <img src={logo} alt="Simplicity Logo" className="nav-brand-logo" />
-            <span className="brand-name">Arjun Sanesh</span>
+            <img src={logo} alt="Logo" className="nav-brand-logo" />
           </a>
         </div>
 
-        {/* Center Links */}
+        {/* Center Links (Uniform Size) */}
         <div className="nav-center-links">
           {desktopNavItems.map((item) => (
             <a
               key={item.label}
               href={item.href}
               onClick={(e) => scrollToSection(e, item.href.replace("#", ""))}
-              className="nav-link-item"
+              className="nav-link-item nav-btn-uniform"
             >
               <span>{item.label}</span>
             </a>
           ))}
         </div>
 
-        {/* Right Actions */}
+        {/* Right Actions (Uniform Size) */}
         <div className="nav-right-actions">
           {/* Subtle Theme Mode Toggle */}
           <button
             type="button"
-            className="nav-theme-toggle-btn"
+            className="nav-theme-toggle-btn nav-btn-uniform"
             onClick={toggleTheme}
             title={theme === "dark" ? "Switch to Paper Theme" : "Switch to Dark Theme"}
             aria-label="Toggle Theme"
@@ -122,7 +119,7 @@ function Navbar() {
           <a
             href="#contact"
             onClick={(e) => scrollToSection(e, "contact")}
-            className="nav-cta-btn"
+            className="nav-cta-btn nav-btn-uniform"
           >
             Contact
           </a>

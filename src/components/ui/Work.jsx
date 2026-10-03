@@ -26,9 +26,9 @@ function Work() {
       <div className="work-container">
         {/* Clean Header */}
         <div className="section-header-block">
-          <span className="section-kicker">02 // WORKS</span>
+          <span className="section-kicker">02 // PROJECTS</span>
           <h2 className="section-heading">
-            Selected Builds &amp; <span>Systems.</span>
+            Featured Projects &amp; <span>Systems.</span>
           </h2>
         </div>
 

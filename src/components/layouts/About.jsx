@@ -95,12 +95,7 @@ function About() {
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
               <span className="neo-titlebar-icon">📁</span>
-              <span className="neo-titlebar-text">PROPERTIES // {activePillar.title}</span>
-            </div>
-            <div className="neo-titlebar-controls">
-              <span className="neo-win-btn">_</span>
-              <span className="neo-win-btn">□</span>
-              <span className="neo-win-btn close">✕</span>
+              <span className="neo-titlebar-text">{activePillar.title}</span>
             </div>
           </div>
 

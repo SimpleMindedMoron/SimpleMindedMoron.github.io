@@ -9,13 +9,8 @@ const contactLinks = [
   },
   {
     label: "GitHub",
-    href: "https://github.com/Simplicity005",
+    href: "https://github.com/Simplemindedmoron",
     icon: "github",
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com",
-    icon: "instagram",
   },
 ];
 
@@ -104,7 +99,7 @@ function Footer() {
               </div>
               <div className="footer-brand-meta">
                 <span className="footer-brand-title">Arjun Sanesh</span>
-                <span className="footer-brand-sub">Software &amp; Embedded Systems &bull; Bangalore</span>
+                <span className="footer-brand-sub">Software &amp; Embedded Systems</span>
               </div>
             </div>
 
