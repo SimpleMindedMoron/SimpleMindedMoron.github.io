@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { projects, categories } from "../../data/projectsData";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
@@ -24,16 +24,28 @@ function Work() {
   return (
     <section className="work-section" id="work">
       <div className="work-container">
-        {/* Clean Header */}
-        <div className="section-header-block">
+        {/* Clean Header with scroll animation */}
+        <motion.div
+          className="section-header-block"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
           <span className="section-kicker">02 // PROJECTS</span>
           <h2 className="section-heading">
             Featured Projects &amp; <span>Systems.</span>
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Clean Controls Strip */}
-        <div className="work-controls-strip">
+        {/* Clean Controls Strip with scroll animation */}
+        <motion.div
+          className="work-controls-strip"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="work-filter-tabs">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat.id;
@@ -70,7 +82,7 @@ function Work() {
               </button>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* Projects Grid */}
         <div className="projects-grid">

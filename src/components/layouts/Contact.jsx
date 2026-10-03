@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 
 function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -20,14 +21,26 @@ function Contact() {
   return (
     <section className="contact-section" id="contact">
       <div className="contact-container">
-        <div className="section-header-block">
+        <motion.div
+          className="section-header-block"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
           <span className="section-kicker">04 // CONNECT</span>
           <h2 className="section-heading">
             Get in <span>Touch.</span>
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="neo-window contact-window">
+        <motion.div
+          className="neo-window contact-window"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
               <span className="neo-titlebar-dot"></span>
@@ -173,7 +186,7 @@ function Contact() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

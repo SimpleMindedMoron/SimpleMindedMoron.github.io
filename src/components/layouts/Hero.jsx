@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "motion/react";
 
 const ROLES = [
   "Full-Stack Web Developer",
@@ -47,7 +48,12 @@ function Hero() {
     <main className="hero-section" id="hero">
       <div className="hero-container">
         {/* Windows 98 / Retro Window */}
-        <div className="neo-window hero-window">
+        <motion.div
+          className="neo-window hero-window"
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           {/* Titlebar: main.exe without window controls */}
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
@@ -174,7 +180,7 @@ function Hero() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </main>
   );

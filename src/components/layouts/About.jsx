@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const PILLARS = [
   {
@@ -39,13 +39,19 @@ function About() {
   return (
     <section className="about-section" id="about">
       <div className="about-container">
-        {/* Header */}
-        <div className="section-header-block">
+        {/* Header with scroll animation */}
+        <motion.div
+          className="section-header-block"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
           <span className="section-kicker">01 // FOCUS</span>
           <h2 className="section-heading">
             Technical Architecture &amp; <span>Capabilities.</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Simplified Tabs */}
         <div className="neo-tabs-bar" role="tablist">
@@ -66,8 +72,14 @@ function About() {
           })}
         </div>
 
-        {/* Tab Content Window */}
-        <div className="neo-window about-window">
+        {/* Tab Content Window with scroll animation */}
+        <motion.div
+          className="neo-window about-window"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
               <span className="neo-titlebar-dot"></span>
@@ -85,7 +97,7 @@ function About() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -14,7 +14,7 @@ export const projects = [
     title: "IoT Laser Security Grid",
     subtitle: "Interrupt-Driven Optical Tripwire Matrix",
     description:
-      "Physical security hardware build featuring an optical laser tripwire array, relay triggers, and sub-millisecond interrupt handling on ESP32 and Arduino microcontrollers.",
+      "Interrupt-driven optical perimeter tripwire system with sub-2ms reaction latency on ESP32.",
     longDescription:
       "Engineered an interrupt-driven optical perimeter system using multi-beam laser diodes, photo-receivers, buzzer sirens, and relay triggers. Optimized with FreeRTOS multitasking on ESP32 to achieve sub-2ms reaction latency and low-power standby operation.",
     image: roboticsImage,
@@ -39,7 +39,7 @@ export const projects = [
     title: "Startup Hub Spatial Optimizer",
     subtitle: "Multi-Objective Geographic Placement Tool",
     description:
-      "Algorithmic decision tool in Python and MATLAB to compute accessible, cost-effective placement locations for startup hubs across urban Bangalore.",
+      "Multi-objective geospatial solver optimizing startup hub placement across urban Bangalore.",
     longDescription:
       "Constructed a multi-objective computational solver combining transit proximity, demographic density, and commercial overheads. Employs heuristic optimization algorithms to produce Pareto-optimal geographic coordinates with interactive contour visualizers.",
     image: optimizationImage,
@@ -64,7 +64,7 @@ export const projects = [
     title: "Autonomous Robotics & SLAM Node",
     subtitle: "ROS 2 LiDAR Mapping & Path Planning",
     description:
-      "Mobile robotics control stack utilizing Robot Operating System (ROS 2), LiDAR point-cloud processing, and obstacle navigation state machines.",
+      "ROS 2 robotics control stack with LiDAR point-cloud mapping and obstacle navigation.",
     longDescription:
       "Developed differential-drive robot control nodes in ROS 2 on Linux Mint. Integrated 2D LiDAR scanning, wheel encoder odometry, and SLAM occupancy grid mapping for autonomous corridor navigation.",
     image: roboticsImage,
@@ -89,7 +89,7 @@ export const projects = [
     title: "Smart Ultrasonic Parking System",
     subtitle: "Automated Distance Sensing & Slot Monitor",
     description:
-      "Hardware parking guidance system utilizing HC-SR04 ultrasonic sensor arrays, threshold logic, and automated occupancy indicators.",
+      "Microcontroller guidance array with ultrasonic telemetry and automated bay detection.",
     longDescription:
       "Designed and calibrated an ultrasonic sensor array with Arduino to detect vehicle occupancy in real-time. Features pulse-width calculation, debounce filtering, and visual LED / buzzer signaling for drivers.",
     image: roboticsImage,
@@ -114,7 +114,7 @@ export const projects = [
     title: "Simplicity Portfolio & Systems UI",
     subtitle: "High-Performance Reactive Web Architecture",
     description:
-      "Clean, minimalist personal portfolio engineered with React 19 and modern CSS tokens. Zero build bloat, fluid physics cursor, and interactive hardware bench.",
+      "Minimalist engineering portfolio with custom physics motion and clean component architecture.",
     longDescription:
       "A fast, distraction-free portfolio interface prioritizing typography, negative space, and instant responsiveness. Built with pure modular CSS, composite-only animations, and zero heavy dependencies.",
     image: optimizationImage,

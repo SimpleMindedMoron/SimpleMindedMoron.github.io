@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { motion } from "motion/react";
 
 const INITIAL_LINES = [
   { type: "system", text: "SYSTEM COMMAND SHELL // v2.0" },
@@ -135,14 +136,26 @@ GitHub:   github.com/Simplemindedmoron`,
   return (
     <section className="terminal-section" id="terminal">
       <div className="terminal-container">
-        <div className="section-header-block">
+        <motion.div
+          className="section-header-block"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
           <span className="section-kicker">03 // INTERFACE</span>
           <h2 className="section-heading">
             Interactive <span>Terminal CLI.</span>
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="neo-window terminal-window">
+        <motion.div
+          className="neo-window terminal-window"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
               <span className="neo-titlebar-dot"></span>
@@ -193,7 +206,7 @@ GitHub:   github.com/Simplemindedmoron`,
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

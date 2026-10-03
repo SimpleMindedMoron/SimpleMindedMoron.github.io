@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import logo from "../../assets/Logo.png";
 
 const contactLinks = [
@@ -18,7 +19,13 @@ function Footer() {
 
   return (
     <footer className="footer-container" id="site-footer">
-      <div className="neo-window footer-neo-window">
+      <motion.div
+        className="neo-window footer-neo-window"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-30px" }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="footer-inner">
           <div className="footer-top">
             <div className="footer-brand">
@@ -59,7 +66,7 @@ function Footer() {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

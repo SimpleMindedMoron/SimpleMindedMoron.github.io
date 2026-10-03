@@ -100,16 +100,16 @@ function Navbar() {
 
         {/* Right Actions (Uniform Size) */}
         <div className="nav-right-actions">
-          {/* Theme Mode Toggle (No emojis, crisp vector icon) */}
+          {/* Theme Mode Toggle (Icon only, no lettering) */}
           <button
             type="button"
-            className="nav-theme-toggle-btn nav-btn-uniform"
+            className="nav-theme-toggle-btn"
             onClick={toggleTheme}
             title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             aria-label="Toggle Theme"
           >
             {theme === "dark" ? (
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="5"></circle>
                 <line x1="12" y1="1" x2="12" y2="3"></line>
                 <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -121,11 +121,10 @@ function Navbar() {
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
               </svg>
             ) : (
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
               </svg>
             )}
-            <span className="theme-toggle-label">{theme === "dark" ? "LIGHT" : "DARK"}</span>
           </button>
 
           {/* Clock */}
