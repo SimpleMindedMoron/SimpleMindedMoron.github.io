@@ -1,19 +1,6 @@
 function ProjectCard({ project, index, onSelect }) {
   const formattedIndex = String(index + 1).padStart(2, "0");
 
-  const getCategoryColor = (cat) => {
-    switch (cat?.toLowerCase()) {
-      case "web":
-        return "neo-badge-teal";
-      case "hardware":
-        return "neo-badge-yellow";
-      case "robotics":
-        return "neo-badge-magenta";
-      default:
-        return "neo-badge-lime";
-    }
-  };
-
   return (
     <div
       className="neo-window interactive-project-card"
@@ -27,15 +14,13 @@ function ProjectCard({ project, index, onSelect }) {
         }
       }}
     >
-      {/* Windows 98 Card Titlebar */}
+      {/* Titlebar */}
       <div className="neo-titlebar">
         <div className="neo-titlebar-left">
           <span className="neo-titlebar-icon">💾</span>
-          <span className="neo-titlebar-text">SYS_{formattedIndex}.DAT // {project.category?.toUpperCase()}</span>
+          <span className="neo-titlebar-text">SYS_{formattedIndex} // {project.title}</span>
         </div>
         <div className="neo-titlebar-controls">
-          <span className="neo-win-btn">_</span>
-          <span className="neo-win-btn">□</span>
           <span className="neo-win-btn">↗</span>
         </div>
       </div>
@@ -48,43 +33,27 @@ function ProjectCard({ project, index, onSelect }) {
           className="card-project-img"
           loading="lazy"
         />
-        <div className="card-top-badges">
-          <span className="neo-badge neo-badge-yellow">{formattedIndex}</span>
-          <span className={`neo-badge ${getCategoryColor(project.category)}`}>
-            {project.category}
-          </span>
-        </div>
+        <span className="card-cat-badge">{project.category}</span>
       </div>
 
       {/* Card Content Body */}
       <div className="card-content-body">
-        <div className="card-header-row">
-          <h3 className="card-heading">{project.title}</h3>
-          <span className="card-year-badge">{project.year || "2024"}</span>
-        </div>
-
+        <h3 className="card-heading">{project.title}</h3>
         <p className="card-summary">{project.description}</p>
 
-        {/* Neo-Brutalist Tech Badges */}
+        {/* Clean Tech Badges */}
         {project.tags && (
           <div className="card-tags-list">
-            {project.tags.slice(0, 3).map((tag, i) => {
-              const colors = ["neo-tag-teal", "neo-tag-yellow", "neo-tag-magenta"];
-              return (
-                <span key={tag} className={`neo-tag ${colors[i % colors.length]}`}>
-                  {tag}
-                </span>
-              );
-            })}
-            {project.tags.length > 3 && (
-              <span className="neo-tag neo-tag-outline">+{project.tags.length - 3}</span>
-            )}
+            {project.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="neo-tag">
+                {tag}
+              </span>
+            ))}
           </div>
         )}
 
-        {/* Card Action Link Bar */}
         <div className="card-action-bar">
-          <span className="card-cta-label">INSPECT ARCHITECTURE</span>
+          <span className="card-cta-label">Inspect Architecture</span>
           <span className="card-cta-arrow">→</span>
         </div>
       </div>

@@ -24,81 +24,51 @@ function Work() {
   return (
     <section className="work-section" id="work">
       <div className="work-container">
-        {/* Section Header */}
+        {/* Clean Header */}
         <div className="section-header-block">
-          <div className="neo-badge neo-badge-teal">
-            <span className="badge-bullet">■</span>
-            <span>DATA DISPLAY // 02</span>
-          </div>
+          <span className="section-kicker">02 // WORKS</span>
           <h2 className="section-heading">
-            Selected Works & <br />
-            <span>Hardware Builds.</span>
+            Selected Builds &amp; <span>Systems.</span>
           </h2>
-          <p className="section-subtext">
-            Physical electronics, embedded firmware, and full-stack software applications. Click any card to inspect system schematics and architecture.
-          </p>
         </div>
 
-        {/* Windows 98 / Neo-Brutalist Controls Bar */}
-        <div className="neo-window work-controls-window">
-          <div className="neo-titlebar">
-            <div className="neo-titlebar-left">
-              <span className="neo-titlebar-icon">💾</span>
-              <span className="neo-titlebar-text">FILE_EXPLORER.EXE // FILTER_CONTROLS</span>
-            </div>
-            <div className="neo-titlebar-controls">
-              <span className="neo-win-btn">_</span>
-              <span className="neo-win-btn">□</span>
-              <span className="neo-win-btn close">✕</span>
-            </div>
+        {/* Clean Controls Strip */}
+        <div className="work-controls-strip">
+          <div className="work-filter-tabs">
+            {categories.map((cat) => {
+              const isActive = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  className={`neo-filter-btn ${isActive ? "active" : ""}`}
+                  onClick={() => setSelectedCategory(cat.id)}
+                >
+                  <span>{cat.label}</span>
+                </button>
+              );
+            })}
           </div>
 
-          <div className="work-controls-content">
-            {/* Filter Tabs */}
-            <div className="work-filter-tabs">
-              {categories.map((cat) => {
-                const isActive = selectedCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    className={`neo-filter-btn ${isActive ? "active" : ""}`}
-                    onClick={() => setSelectedCategory(cat.id)}
-                  >
-                    <span>{cat.label}</span>
-                    {isActive && <span className="filter-active-dot">●</span>}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Search Input Box */}
-            <div className="work-search-wrapper">
-              <span className="search-icon-prefix">🔍</span>
-              <input
-                type="text"
-                className="neo-input work-search-input"
-                placeholder="SEARCH_PROJECTS.LOG..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                aria-label="Filter projects"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  className="search-clear-btn"
-                  onClick={() => setSearchQuery("")}
-                  aria-label="Clear search"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-
-            {/* Item Count Badge */}
-            <div className="work-count-badge">
-              <span>FOUND: {filteredProjects.length} OF {projects.length}</span>
-            </div>
+          <div className="work-search-wrapper">
+            <input
+              type="text"
+              className="neo-input work-search-input"
+              placeholder="Search projects..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Filter projects"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                className="search-clear-btn"
+                onClick={() => setSearchQuery("")}
+                aria-label="Clear search"
+              >
+                ✕
+              </button>
+            )}
           </div>
         </div>
 
@@ -118,9 +88,9 @@ function Work() {
           <div className="neo-window empty-results-window">
             <div className="empty-state-content">
               <span className="empty-icon">📦</span>
-              <h3 className="empty-title">NO MATCHING SYSTEMS FOUND</h3>
+              <h3 className="empty-title">No matching projects</h3>
               <p className="empty-desc">
-                No records matching query "{searchQuery}". Try clearing filters or entering a different keyword.
+                No systems found matching "{searchQuery}".
               </p>
               <button
                 type="button"
@@ -130,7 +100,7 @@ function Work() {
                   setSearchQuery("");
                 }}
               >
-                RESET FILTERS
+                Reset Filters
               </button>
             </div>
           </div>

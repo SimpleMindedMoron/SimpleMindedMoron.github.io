@@ -1,21 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 
 const INITIAL_LINES = [
-  { type: "system", text: "SIMPLICITY_OS COMMAND INTERPRETER v98.4 [EMBEDDED & WEB]" },
-  { type: "system", text: "Copyright (C) 1998-2026 Arjun Sanesh. All rights reserved." },
-  { type: "system", text: "Dual-Boot Runtime: Linux Mint 21.3 / Windows 11." },
-  { type: "hint", text: "Click any command shortcut below or type commands directly:" },
+  { type: "system", text: "SIMPLICITY_OS COMMAND SHELL v98.4" },
+  { type: "hint", text: "Type 'help' or click shortcuts below to query system:" },
 ];
 
-const SUGGESTED_COMMANDS = [
-  "whoami",
-  "skills",
-  "hardware",
-  "projects",
-  "neofetch",
-  "contact",
-  "clear",
-];
+const SUGGESTED_COMMANDS = ["whoami", "skills", "hardware", "projects", "clear"];
 
 function Terminal() {
   const [history, setHistory] = useState(INITIAL_LINES);
@@ -38,92 +28,65 @@ function Terminal() {
     setCommandHistory((prev) => [...prev, rawCmd]);
     setCmdIndex(-1);
 
-    const newEntries = [{ type: "prompt", text: `C:\\WIN98\\SYSTEM> ${rawCmd}` }];
+    const newEntries = [{ type: "prompt", text: `arjun@simplicity:~$ ${rawCmd}` }];
 
     switch (cmd) {
       case "help":
         newEntries.push({
           type: "output",
-          text: `Available Commands:
+          text: `Commands:
   • whoami    - About Arjun Sanesh & background
-  • skills    - Technical toolkit & stack breakdown
+  • skills    - Technical toolkit & language stack
   • hardware  - Microcontrollers, sensors & robotics
   • projects  - Software applications & hardware builds
-  • neofetch  - System information & hardware specs
-  • contact   - Profiles & direct transmission email
-  • clear     - Clear terminal buffer
-  • date      - Print current system time`,
+  • contact   - Profiles & direct email
+  • clear     - Clear terminal buffer`,
         });
         break;
 
       case "whoami":
         newEntries.push({
           type: "output",
-          text: `[USER]: Arjun Sanesh (@Simplicity005)
-[ROLE]: Software & Embedded Systems Engineer
-[LOCATION]: Bangalore, Karnataka, India
-[PASSION]: High-utility web architectures, microcontroller firmware, and robotics automation.
-[WORKFLOW]: Dual-boot engineer using Linux Mint for agility/ROS and Windows 11 for hardware toolchains.`,
+          text: `Arjun Sanesh (@Simplicity005)
+Software & Embedded Systems Engineer based in Bangalore, India.
+Dual-boot workflow: Linux Mint + Windows 11.`,
         });
         break;
 
       case "skills":
         newEntries.push({
           type: "output",
-          text: `[LANGUAGES]:  C++, Python, JavaScript (ES6+), Modern CSS, HTML5, Bash
-[FRAMEWORKS]: React 19, Vite, Node.js, ROS 2, Express, FreeRTOS
-[HARDWARE]:   ESP32 (WROOM-32), Arduino Uno/Nano, Raspberry Pi, Sensors, Relays
-[PROTOCOLS]:  I2C, SPI, UART, REST APIs, WebSockets, MQTT
-[DEV TOOLS]:  Git, VS Code, PlatformIO, Linux Mint CLI, Zsh, PlatformIO`,
+          text: `Languages:  C++, Python, JavaScript (ES6+), Modern CSS, HTML5, Bash
+Frameworks: React 19, Vite, Node.js, ROS 2, FreeRTOS
+Hardware:   ESP32 (WROOM-32), Arduino Uno/Nano, Raspberry Pi, Sensors, Relays
+Buses:      I2C, SPI, UART, REST APIs, WebSockets`,
         });
         break;
 
       case "hardware":
         newEntries.push({
           type: "output",
-          text: `[BENCH CONFIGURATION]:
-  • ESP-WROOM-32 Dual-Core @ 240MHz: Laser tripwire & IoT telemetry
-  • Arduino Microcontrollers: Sensor ADC conversion, motor PWM
-  • Sensor Peripherals: Ultrasonic sonar, LiDAR, IR optical breaks, relay triggers
-  • Automation Lab: Automated switching circuits & differential-drive chassis`,
+          text: `ESP32 dual-core IoT circuits, laser security tripwire,
+sensor ADC conversions, and differential-drive ROS 2 robotics chassis.`,
         });
         break;
 
       case "projects":
         newEntries.push({
           type: "output",
-          text: `[ACTIVE SYSTEM REPOSITORIES]:
-  1. Laser Security Grid (ESP32 / Laser / Optocouplers / C++)
-  2. ROS 2 Autonomous Robot (LiDAR / SLAM / Differential Drive)
-  3. Interactive Web Portfolio (React / Neo-Brutalist Win98 / Canvas)
-  4. Real-time Telemetry Dashboard (Node.js / WebSockets / Charting)`,
-        });
-        break;
-
-      case "neofetch":
-        newEntries.push({
-          type: "output",
-          text: `         .---.          arjun@simplicity-win98
-        /     \\         ----------------------
-       | () () |        OS: Linux Mint 21.3 / Windows 11 Dual-Boot
-        \\  -  /         Kernel: 6.5.0-x86_64
-         \`---\`          Shell: Zsh 5.9 / Bash
-       /|     |\\        Terminal: Neo-Brutalist Command Shell v98.4
-      / |     | \\       CPU: Intel Core i7 / ESP32 Dual-Core 240MHz
-     (  |     |  )      Memory: 32GB DDR4 RAM / 520KB SRAM
-      \`-\`     \`-\`       Architecture: Full-Stack Web + Embedded Systems
-                        Status: Open for engineering opportunities`,
+          text: `1. Laser Security Tripwire (ESP32 / Laser / Optocouplers / C++)
+2. Autonomous Robot Platform (ROS 2 / LiDAR / Differential Drive)
+3. Interactive Portfolio (React / Neo-Brutalist / Canvas Physics)
+4. Telemetry Stream Dashboard (Node.js / WebSockets)`,
         });
         break;
 
       case "contact":
         newEntries.push({
           type: "output",
-          text: `[DIRECT TRANSMISSION]:
-  • Email:     arjunsanesh@gmail.com
-  • LinkedIn:  https://www.linkedin.com/in/arjun-sanesh/
-  • GitHub:    https://github.com/Simplicity005
-  • Instagram: https://www.instagram.com`,
+          text: `Email:    arjunsanesh@gmail.com
+LinkedIn: linkedin.com/in/arjun-sanesh/
+GitHub:   github.com/Simplicity005`,
         });
         break;
 
@@ -133,17 +96,10 @@ function Terminal() {
         setInputVal("");
         return;
 
-      case "date":
-        newEntries.push({
-          type: "output",
-          text: `Current System Time: ${new Date().toString()}`,
-        });
-        break;
-
       default:
         newEntries.push({
           type: "error",
-          text: `Bad command or file name: '${cmd}'. Type 'help' for available system commands.`,
+          text: `Unknown command: '${cmd}'. Type 'help' for available commands.`,
         });
         break;
     }
@@ -179,28 +135,18 @@ function Terminal() {
   return (
     <section className="terminal-section" id="terminal">
       <div className="terminal-container">
-        {/* Section Header */}
         <div className="section-header-block">
-          <div className="neo-badge neo-badge-magenta">
-            <span className="badge-bullet">■</span>
-            <span>SYSTEM INTERFACE // 03</span>
-          </div>
+          <span className="section-kicker">03 // INTERFACE</span>
           <h2 className="section-heading">
-            Command Interpreter & <br />
-            <span>Interactive Terminal.</span>
+            Interactive <span>Terminal CLI.</span>
           </h2>
-          <p className="section-subtext">
-            Execute real-time commands to query developer biography, technical stack, hardware specifications, and system telemetry.
-          </p>
         </div>
 
-        {/* Windows 98 / MS-DOS Terminal Window */}
         <div className="neo-window terminal-window">
-          {/* Windows 98 Command Prompt Titlebar */}
-          <div className="neo-titlebar neo-titlebar-terminal">
+          <div className="neo-titlebar">
             <div className="neo-titlebar-left">
               <span className="neo-titlebar-icon">📟</span>
-              <span className="neo-titlebar-text">C:\WIN98\COMMAND.COM - [80x25]</span>
+              <span className="neo-titlebar-text">COMMAND_PROMPT // SHELL</span>
             </div>
             <div className="neo-titlebar-controls">
               <span className="neo-win-btn">_</span>
@@ -209,25 +155,22 @@ function Terminal() {
             </div>
           </div>
 
-          {/* Quick Command Action Chips (Solid Accent Blocks per reference sheet) */}
+          {/* Clean Shortcuts */}
           <div className="terminal-quick-chips">
-            <span className="chips-label">QUICK MACROS:</span>
-            {SUGGESTED_COMMANDS.map((cmd, idx) => {
-              const colors = ["neo-tag-yellow", "neo-tag-teal", "neo-tag-magenta", "neo-tag-lime"];
-              return (
-                <button
-                  key={cmd}
-                  type="button"
-                  className={`neo-tag ${colors[idx % colors.length]} terminal-macro-btn`}
-                  onClick={() => runCommand(cmd)}
-                >
-                  <span>&gt; {cmd}</span>
-                </button>
-              );
-            })}
+            <span className="chips-label">SHORTCUTS:</span>
+            {SUGGESTED_COMMANDS.map((cmd) => (
+              <button
+                key={cmd}
+                type="button"
+                className="neo-tag terminal-macro-btn"
+                onClick={() => runCommand(cmd)}
+              >
+                <span>{cmd}</span>
+              </button>
+            ))}
           </div>
 
-          {/* Terminal Screen Console */}
+          {/* Console Body */}
           <div
             className="terminal-body"
             ref={terminalBodyRef}
@@ -239,9 +182,8 @@ function Terminal() {
               </div>
             ))}
 
-            {/* Active Command Input Line */}
             <div className="terminal-input-row">
-              <span className="terminal-prompt-str">C:\WIN98\SYSTEM&gt;</span>
+              <span className="terminal-prompt-str">arjun@simplicity:~$</span>
               <input
                 ref={inputRef}
                 type="text"
@@ -249,18 +191,11 @@ function Terminal() {
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="type command (e.g. whoami, neofetch)..."
+                placeholder="type help..."
                 autoComplete="off"
                 spellCheck="false"
               />
             </div>
-          </div>
-
-          {/* Windows 98 Bottom Status Bar */}
-          <div className="neo-statusbar">
-            <span className="statusbar-item">BUFFER: READY</span>
-            <span className="statusbar-item">CODEPAGE: 437 (US-ASCII)</span>
-            <span className="statusbar-item statusbar-fill">TYPE 'HELP' FOR ALL COMMANDS</span>
           </div>
         </div>
       </div>
