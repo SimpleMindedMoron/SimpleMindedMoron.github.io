@@ -1,13 +1,11 @@
 import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { projects, categories } from "../../data/projectsData";
 import ProjectCard from "./ProjectCard";
-import ProjectModal from "./ProjectModal";
 
 function Work() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeModalProject, setActiveModalProject] = useState(null);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((p) => {
@@ -91,7 +89,6 @@ function Work() {
               key={project.id}
               project={project}
               index={idx}
-              onSelect={setActiveModalProject}
             />
           ))}
         </div>
@@ -117,16 +114,6 @@ function Work() {
             </div>
           </div>
         )}
-
-        {/* Modal Window */}
-        <AnimatePresence>
-          {activeModalProject && (
-            <ProjectModal
-              project={activeModalProject}
-              onClose={() => setActiveModalProject(null)}
-            />
-          )}
-        </AnimatePresence>
       </div>
     </section>
   );

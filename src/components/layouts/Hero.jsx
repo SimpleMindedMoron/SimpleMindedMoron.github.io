@@ -70,9 +70,6 @@ function Hero() {
                   <span className="greeting-prompt">&gt;</span>
                   <span className="greeting-text">Hello, I am</span>
                 </div>
-                <div className="hero-role-pill">
-                  <span className="role-sublabel">Full-Stack &amp; Embedded Systems</span>
-                </div>
               </div>
 
               {/* Dedicated Full-Width Name Row - Stable on Mobile & Small Screens */}

@@ -189,9 +189,9 @@ function Navbar() {
                 <motion.div
                   className="mobile-drawer"
                   onClick={(e) => e.stopPropagation()}
-                  initial={{ x: "-100%" }}
+                  initial={{ x: "100%" }}
                   animate={{ x: 0 }}
-                  exit={{ x: "-100%" }}
+                  exit={{ x: "100%" }}
                   transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="drawer-header">

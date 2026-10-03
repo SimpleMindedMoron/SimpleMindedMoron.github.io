@@ -1,14 +1,16 @@
 import { motion } from "motion/react";
 
-function ProjectCard({ project, index, onSelect }) {
+function ProjectCard({ project, index }) {
   const prjNumber = `PRJ_${index + 1}`;
+  const githubUrl = "https://github.com/Simplemindedmoron";
 
   return (
-    <motion.div
-      className="neo-window interactive-project-card"
-      onClick={() => onSelect(project)}
-      role="button"
-      tabIndex={0}
+    <motion.a
+      href={githubUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="neo-window interactive-project-card project-card-link"
+      title={`Inspect ${project.title} on GitHub`}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
@@ -16,12 +18,6 @@ function ProjectCard({ project, index, onSelect }) {
         duration: 0.5,
         delay: (index % 3) * 0.08,
         ease: [0.16, 1, 0.3, 1],
-      }}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onSelect(project);
-        }
       }}
     >
       {/* Titlebar with automatic PRJ_ index */}
@@ -61,10 +57,10 @@ function ProjectCard({ project, index, onSelect }) {
 
         <div className="card-action-bar">
           <span className="card-cta-label">Inspect Architecture</span>
-          <span className="card-cta-arrow">→</span>
+          <span className="card-cta-arrow">↗</span>
         </div>
       </div>
-    </motion.div>
+    </motion.a>
   );
 }
 

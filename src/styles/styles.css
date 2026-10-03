@@ -870,15 +870,6 @@ body {
   letter-spacing: 0.02em;
 }
 
-.hero-role-pill {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-}
-
 .hero-name-row {
   margin-bottom: 20px;
   display: flex;
@@ -1192,6 +1183,8 @@ body {
   display: flex;
   flex-direction: column;
   border-radius: var(--radius-box);
+  text-decoration: none;
+  color: inherit;
 }
 
 .interactive-project-card:hover {
@@ -1788,29 +1781,29 @@ body {
     align-items: center;
   }
 
-  /* Push hamburger and theme toggle to LEFT side on mobile */
-  .nav-right-actions {
+  /* Brand logo icon on the LEFT side on mobile */
+  .nav-brand {
     order: 1;
-    justify-self: flex-start;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Theme toggle icon and hamburger on the RIGHT side on mobile */
+  .nav-right-actions {
+    order: 2;
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
-  .mobile-hamburger-btn {
-    display: flex;
+  .nav-theme-toggle-btn {
+    display: inline-flex;
     order: 1;
   }
 
-  .nav-theme-toggle-btn {
-    display: inline-flex;
+  .mobile-hamburger-btn {
+    display: flex;
     order: 2;
-  }
-
-  /* Push brand logo to RIGHT side on mobile */
-  .nav-brand {
-    order: 2;
-    justify-self: flex-end;
   }
 
   .nav-center-links,
@@ -1819,15 +1812,15 @@ body {
     display: none;
   }
 
-  /* Mobile drawer slides out from the left where hamburger sits */
+  /* Mobile drawer slides out from the right where hamburger sits */
   .mobile-drawer-backdrop {
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 
   .mobile-drawer {
-    border-left: none;
-    border-right: var(--stroke-width) solid var(--stroke-primary);
-    box-shadow: 6px 0px 0px var(--stroke-primary);
+    border-right: none;
+    border-left: var(--stroke-width) solid var(--stroke-primary);
+    box-shadow: -6px 0px 0px var(--stroke-primary);
   }
 
   .hero-section {
@@ -1865,10 +1858,6 @@ body {
   .hero-greeting-pill {
     font-size: 0.72rem;
     padding: 3px 8px;
-  }
-
-  .hero-role-pill {
-    font-size: 0.68rem;
   }
 
   .hero-name-row {
