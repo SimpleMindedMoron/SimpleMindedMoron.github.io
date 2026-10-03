@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import logo from "../../assets/Logo.png";
+import logoLight from "../../assets/images/logo.svg";
+import logoDark from "../../assets/images/logo-dark.svg";
 
 const contactLinks = [
   {
@@ -30,7 +31,8 @@ function Footer() {
           <div className="footer-top">
             <div className="footer-brand">
               <div className="footer-logo-badge">
-                <img src={logo} alt="Arjun Sanesh logo" className="footer-logo" />
+                <img src={logoLight} alt="Arjun Sanesh logo" className="footer-logo footer-logo-light" />
+                <img src={logoDark} alt="Arjun Sanesh logo" className="footer-logo footer-logo-dark" />
               </div>
               <div className="footer-brand-meta">
                 <span className="footer-brand-title">Arjun Sanesh</span>

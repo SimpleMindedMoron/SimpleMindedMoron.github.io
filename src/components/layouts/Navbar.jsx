@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
-import logo from "../../assets/Logo.png";
+import logoLight from "../../assets/images/logo.svg";
+import logoDark from "../../assets/images/logo-dark.svg";
 
 const desktopNavItems = [
   { label: "About", href: "#about" },
@@ -26,6 +27,8 @@ function Navbar() {
     }
     return "dark";
   });
+
+  const currentLogo = theme === "paper" ? logoDark : logoLight;
 
   // Body scroll lock on mobile when drawer is open
   useEffect(() => {
@@ -88,7 +91,7 @@ function Navbar() {
   return (
     <header className={`navbar-wrapper ${isScrolled ? "is-scrolled" : ""}`} id="main-nav">
       <nav className="navbar-pill">
-        {/* Brand: Logo Only */}
+        {/* Brand: Theme-Aware SVG Logo Only */}
         <div className="nav-brand">
           <a
             href="/"
@@ -97,7 +100,7 @@ function Navbar() {
             aria-label="Home"
             title="Arjun Sanesh Portfolio"
           >
-            <img src={logo} alt="Logo" className="nav-brand-logo" />
+            <img src={currentLogo} alt="Logo" className="nav-brand-logo" />
           </a>
         </div>
 
@@ -186,9 +189,9 @@ function Navbar() {
                 <motion.div
                   className="mobile-drawer"
                   onClick={(e) => e.stopPropagation()}
-                  initial={{ x: "100%" }}
+                  initial={{ x: "-100%" }}
                   animate={{ x: 0 }}
-                  exit={{ x: "100%" }}
+                  exit={{ x: "-100%" }}
                   transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="drawer-header">

@@ -58,28 +58,32 @@
 }
 
 /* --------------------------------------------------------------------------
-   THEME OVERRIDE: PAPER BEIGE (CALM VINTAGE LINEN)
+   THEME OVERRIDE: PAPER BEIGE (CALM VINTAGE OFF-WHITE)
    -------------------------------------------------------------------------- */
 [data-theme="paper"] {
-  --bg-canvas: #f4f0e6;
-  --bg-card: #ffffff;
-  --bg-card-secondary: #faf8f2;
-  --bg-card-inset: #ede8dc;
-  --titlebar-bg: #ebe5d7;
+  --bg-canvas: #eae4d4;
+  --bg-card: rgba(242, 237, 226, 0.96);
+  --bg-card-secondary: #e5decc;
+  --bg-card-inset: #ded6c2;
+  --titlebar-bg: #d7cfb9;
   --titlebar-text: #1a1a1a;
-  --statusbar-bg: #ebe5d7;
-  --statusbar-text: #555555;
+  --statusbar-bg: #d7cfb9;
+  --statusbar-text: #4e4e4e;
 
   --stroke-primary: #000000;
 
-  --text-primary: #151515;
-  --text-secondary: #353535;
-  --text-muted: #666666;
+  --text-primary: #181818;
+  --text-secondary: #383838;
+  --text-muted: #5e5e5e;
 
-  --dot-color: rgba(0, 0, 0, 0.09);
-  --dot-glow-color: rgba(59, 130, 139, 0.25);
-  --orb-1-color: rgba(59, 130, 139, 0.05);
-  --orb-2-color: rgba(194, 147, 74, 0.08);
+  --accent-teal: #2f6d75;
+  --accent-amber: #a5742e;
+  --win-gray: #cbc3b0;
+
+  --dot-color: rgba(0, 0, 0, 0.08);
+  --dot-glow-color: rgba(47, 109, 117, 0.22);
+  --orb-1-color: rgba(47, 109, 117, 0.05);
+  --orb-2-color: rgba(165, 116, 46, 0.06);
 }
 
 /* --------------------------------------------------------------------------
@@ -237,11 +241,22 @@ body {
   z-index: 2;
 }
 
+.ambient-optical-blur {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  z-index: 3;
+}
+
 /* --------------------------------------------------------------------------
    4. COMPACT NEO-BRUTALIST WINDOWS & BUTTONS
    -------------------------------------------------------------------------- */
 .neo-window {
   background: var(--bg-card);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   border: var(--stroke-width) solid var(--stroke-primary);
   box-shadow: var(--shadow-2);
   border-radius: var(--radius-box);
@@ -537,6 +552,8 @@ body {
   max-width: var(--max-width);
   height: 44px;
   background: var(--bg-card);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: var(--stroke-width) solid var(--stroke-primary);
   box-shadow: var(--shadow-2);
   padding: 0 12px;
@@ -821,23 +838,45 @@ body {
   padding: clamp(28px, 4.5vw, 48px);
 }
 
-.hero-salutation-line {
+.hero-greeting-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.hero-greeting-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--bg-card-secondary);
+  border: 1px solid var(--stroke-primary);
+  box-shadow: 1.5px 1.5px 0px var(--stroke-primary);
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  margin-bottom: 12px;
+  color: var(--text-primary);
+  border-radius: var(--radius-btn);
 }
 
-.salutation-prefix {
+.greeting-prompt {
   color: var(--accent-teal);
+  font-weight: 800;
 }
 
-.salutation-label {
+.greeting-text {
+  letter-spacing: 0.02em;
+}
+
+.hero-role-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   color: var(--text-muted);
+  letter-spacing: 0.04em;
 }
 
 .hero-name-row {
@@ -1673,6 +1712,22 @@ body {
   object-fit: contain;
 }
 
+.footer-logo-dark {
+  display: none;
+}
+
+.footer-logo-light {
+  display: block;
+}
+
+[data-theme="paper"] .footer-logo-dark {
+  display: block;
+}
+
+[data-theme="paper"] .footer-logo-light {
+  display: none;
+}
+
 .footer-brand-title {
   display: block;
   font-family: var(--font-display);
@@ -1727,14 +1782,52 @@ body {
    13. RESPONSIVE ADJUSTMENTS
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 768px) {
+  .navbar-pill {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Push hamburger and theme toggle to LEFT side on mobile */
+  .nav-right-actions {
+    order: 1;
+    justify-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mobile-hamburger-btn {
+    display: flex;
+    order: 1;
+  }
+
+  .nav-theme-toggle-btn {
+    display: inline-flex;
+    order: 2;
+  }
+
+  /* Push brand logo to RIGHT side on mobile */
+  .nav-brand {
+    order: 2;
+    justify-self: flex-end;
+  }
+
   .nav-center-links,
   .nav-system-tray,
   .nav-cta-btn {
     display: none;
   }
 
-  .mobile-hamburger-btn {
-    display: flex;
+  /* Mobile drawer slides out from the left where hamburger sits */
+  .mobile-drawer-backdrop {
+    justify-content: flex-start;
+  }
+
+  .mobile-drawer {
+    border-left: none;
+    border-right: var(--stroke-width) solid var(--stroke-primary);
+    box-shadow: 6px 0px 0px var(--stroke-primary);
   }
 
   .hero-section {
@@ -1764,10 +1857,18 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-  .hero-salutation-line {
+  .hero-greeting-row {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .hero-greeting-pill {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+  }
+
+  .hero-role-pill {
     font-size: 0.68rem;
-    flex-wrap: wrap;
-    gap: 4px;
   }
 
   .hero-name-row {

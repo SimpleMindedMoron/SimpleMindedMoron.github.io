@@ -64,10 +64,15 @@ function Hero() {
 
           <div className="hero-window-inner">
             <div className="hero-content">
-              {/* Clean Retro Salutation Kicker */}
-              <div className="hero-salutation-line">
-                <span className="salutation-prefix">&gt; ENGINEER:</span>
-                <span className="salutation-label">Full-Stack &amp; Embedded Systems</span>
+              {/* Clean Retro Salutation Kicker with 'Hello, I am' */}
+              <div className="hero-greeting-row">
+                <div className="hero-greeting-pill">
+                  <span className="greeting-prompt">&gt;</span>
+                  <span className="greeting-text">Hello, I am</span>
+                </div>
+                <div className="hero-role-pill">
+                  <span className="role-sublabel">Full-Stack &amp; Embedded Systems</span>
+                </div>
               </div>
 
               {/* Dedicated Full-Width Name Row - Stable on Mobile & Small Screens */}

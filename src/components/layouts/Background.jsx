@@ -364,6 +364,9 @@ function Background() {
 
       {/* Peripheral Vignette for Focus & Contrast */}
       <div className="ambient-vignette" />
+
+      {/* Subtle 1% optical diffusion blur between background simulation and foreground */}
+      <div className="ambient-optical-blur" />
     </div>
   );
 }
