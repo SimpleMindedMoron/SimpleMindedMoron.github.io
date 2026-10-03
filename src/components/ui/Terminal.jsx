@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { motion } from "motion/react";
 
 const INITIAL_LINES = [
-  { type: "system", text: "SimplicityOS Terminal v3.4 [Embedded & Web Environment]" },
-  { type: "system", text: "Dual-Boot Environment: Linux Mint 21.3 / Windows 11." },
-  { type: "hint", text: "Type 'help' or click any command shortcut below to explore:" },
+  { type: "system", text: "SIMPLICITY_OS COMMAND INTERPRETER v98.4 [EMBEDDED & WEB]" },
+  { type: "system", text: "Copyright (C) 1998-2026 Arjun Sanesh. All rights reserved." },
+  { type: "system", text: "Dual-Boot Runtime: Linux Mint 21.3 / Windows 11." },
+  { type: "hint", text: "Click any command shortcut below or type commands directly:" },
 ];
 
 const SUGGESTED_COMMANDS = [
@@ -16,8 +16,6 @@ const SUGGESTED_COMMANDS = [
   "contact",
   "clear",
 ];
-
-const poshEase = [0.16, 1, 0.3, 1];
 
 function Terminal() {
   const [history, setHistory] = useState(INITIAL_LINES);
@@ -40,7 +38,7 @@ function Terminal() {
     setCommandHistory((prev) => [...prev, rawCmd]);
     setCmdIndex(-1);
 
-    const newEntries = [{ type: "prompt", text: `arjun@simplicity:~$ ${rawCmd}` }];
+    const newEntries = [{ type: "prompt", text: `C:\\WIN98\\SYSTEM> ${rawCmd}` }];
 
     switch (cmd) {
       case "help":
@@ -52,7 +50,7 @@ function Terminal() {
   • hardware  - Microcontrollers, sensors & robotics
   • projects  - Software applications & hardware builds
   • neofetch  - System information & hardware specs
-  • contact   - Profiles & email
+  • contact   - Profiles & direct transmission email
   • clear     - Clear terminal buffer
   • date      - Print current system time`,
         });
@@ -61,79 +59,79 @@ function Terminal() {
       case "whoami":
         newEntries.push({
           type: "output",
-          text: `ARJUN SANESH (Simplicity / Simple Minded Moron)
-Role: Software Developer & Hardware Tinkerer
-Location: Bangalore, India
-Focus: Building clean web applications and physical hardware systems.
-Experienced with ESP32, Arduino, sensors, and full-stack web development.
-Dual-boots Linux Mint & Windows 11.`,
+          text: `[USER]: Arjun Sanesh (@Simplicity005)
+[ROLE]: Software & Embedded Systems Engineer
+[LOCATION]: Bangalore, Karnataka, India
+[PASSION]: High-utility web architectures, microcontroller firmware, and robotics automation.
+[WORKFLOW]: Dual-boot engineer using Linux Mint for agility/ROS and Windows 11 for hardware toolchains.`,
         });
         break;
 
       case "skills":
         newEntries.push({
           type: "output",
-          text: `TECHNICAL TOOLKIT:
-  [Software & Web] : React 19, JavaScript, Modern CSS, HTML5, Vite, Node.js
-  [Hardware & IoT] : ESP32, Arduino Uno/Nano, FreeRTOS, Embedded C/C++
-  [Sensors & IO]   : Laser tripwires, Ultrasonic (HC-SR04), Relays, I2C, SPI, UART
-  [Robotics]       : ROS 2, Gazebo, SLAM, Differential Drive
-  [Environment]    : Linux Mint, Windows 11, Git, Bash`,
+          text: `[LANGUAGES]:  C++, Python, JavaScript (ES6+), Modern CSS, HTML5, Bash
+[FRAMEWORKS]: React 19, Vite, Node.js, ROS 2, Express, FreeRTOS
+[HARDWARE]:   ESP32 (WROOM-32), Arduino Uno/Nano, Raspberry Pi, Sensors, Relays
+[PROTOCOLS]:  I2C, SPI, UART, REST APIs, WebSockets, MQTT
+[DEV TOOLS]:  Git, VS Code, PlatformIO, Linux Mint CLI, Zsh, PlatformIO`,
         });
         break;
 
       case "hardware":
         newEntries.push({
           type: "output",
-          text: `HARDWARE INVENTORY:
-  • ESP-WROOM-32 : Wi-Fi & BLE dual core IoT microcontroller
-  • Arduino Uno  : Sensor multiplexing & actuator control
-  • Laser Grid   : Optical tripwire perimeter with <2ms latency
-  • Sonar Sensor : Ultrasonic vehicle distance detection
-  • ROS 2 Node   : LiDAR mapping & differential drive navigation`,
+          text: `[BENCH CONFIGURATION]:
+  • ESP-WROOM-32 Dual-Core @ 240MHz: Laser tripwire & IoT telemetry
+  • Arduino Microcontrollers: Sensor ADC conversion, motor PWM
+  • Sensor Peripherals: Ultrasonic sonar, LiDAR, IR optical breaks, relay triggers
+  • Automation Lab: Automated switching circuits & differential-drive chassis`,
         });
         break;
 
       case "projects":
         newEntries.push({
           type: "output",
-          text: `FEATURED WORKS:
-  1. IoT Laser Security Grid       [ESP32 / Arduino / Relays / C++]
-  2. Startup Hub Spatial Optimizer [Python / MATLAB / Algorithms]
-  3. Autonomous Robotics Node      [ROS 2 / SLAM / LiDAR / Linux Mint]
-  4. Ultrasonic Parking System     [Arduino / HC-SR04 / Sensors]
-  5. Simplicity Portfolio UI       [React 19 / Modern CSS / Vite]
-(Select any card in 'Selected Works' for architecture details)`,
+          text: `[ACTIVE SYSTEM REPOSITORIES]:
+  1. Laser Security Grid (ESP32 / Laser / Optocouplers / C++)
+  2. ROS 2 Autonomous Robot (LiDAR / SLAM / Differential Drive)
+  3. Interactive Web Portfolio (React / Neo-Brutalist Win98 / Canvas)
+  4. Real-time Telemetry Dashboard (Node.js / WebSockets / Charting)`,
         });
         break;
 
       case "neofetch":
         newEntries.push({
-          type: "ascii",
-          text: `
-    /\\_/\\     arjun@simplicity-rig
-   ( o.o )    --------------------
-    > ^ <     OS: Linux Mint 21.3 / Windows 11 Dual-Boot
-              Host: Custom Embedded & Workstation Rig
-              Kernel: 6.5.0-x86_64
-              Uptime: 3+ years tinkering
-              Shell: zsh / bash
-              Terminal: Web PTY
-              Hardware: ESP32, Arduino Uno, Sensor Arrays
-`,
+          type: "output",
+          text: `         .---.          arjun@simplicity-win98
+        /     \\         ----------------------
+       | () () |        OS: Linux Mint 21.3 / Windows 11 Dual-Boot
+        \\  -  /         Kernel: 6.5.0-x86_64
+         \`---\`          Shell: Zsh 5.9 / Bash
+       /|     |\\        Terminal: Neo-Brutalist Command Shell v98.4
+      / |     | \\       CPU: Intel Core i7 / ESP32 Dual-Core 240MHz
+     (  |     |  )      Memory: 32GB DDR4 RAM / 520KB SRAM
+      \`-\`     \`-\`       Architecture: Full-Stack Web + Embedded Systems
+                        Status: Open for engineering opportunities`,
         });
         break;
 
       case "contact":
         newEntries.push({
           type: "output",
-          text: `CONNECT:
-  • Email     : arjunsanesh@gmail.com
-  • LinkedIn  : https://www.linkedin.com/in/arjun-sanesh/
-  • GitHub    : https://github.com/Simplicity005
-  • Instagram : https://www.instagram.com`,
+          text: `[DIRECT TRANSMISSION]:
+  • Email:     arjunsanesh@gmail.com
+  • LinkedIn:  https://www.linkedin.com/in/arjun-sanesh/
+  • GitHub:    https://github.com/Simplicity005
+  • Instagram: https://www.instagram.com`,
         });
         break;
+
+      case "clear":
+      case "cls":
+        setHistory([]);
+        setInputVal("");
+        return;
 
       case "date":
         newEntries.push({
@@ -142,15 +140,10 @@ Dual-boots Linux Mint & Windows 11.`,
         });
         break;
 
-      case "clear":
-        setHistory([]);
-        setInputVal("");
-        return;
-
       default:
         newEntries.push({
           type: "error",
-          text: `simplicity: command not found: '${rawCmd}'. Type 'help' to see valid commands.`,
+          text: `Bad command or file name: '${cmd}'. Type 'help' for available system commands.`,
         });
         break;
     }
@@ -161,26 +154,24 @@ Dual-boots Linux Mint & Windows 11.`,
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault();
       runCommand(inputVal);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      if (commandHistory.length > 0) {
-        const nextIdx = cmdIndex === -1 ? commandHistory.length - 1 : Math.max(0, cmdIndex - 1);
-        setCmdIndex(nextIdx);
-        setInputVal(commandHistory[nextIdx]);
-      }
+      if (commandHistory.length === 0) return;
+      const nextIndex =
+        cmdIndex === -1 ? commandHistory.length - 1 : Math.max(0, cmdIndex - 1);
+      setCmdIndex(nextIndex);
+      setInputVal(commandHistory[nextIndex]);
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
-      if (cmdIndex !== -1) {
-        const nextIdx = cmdIndex + 1;
-        if (nextIdx < commandHistory.length) {
-          setCmdIndex(nextIdx);
-          setInputVal(commandHistory[nextIdx]);
-        } else {
-          setCmdIndex(-1);
-          setInputVal("");
-        }
+      if (cmdIndex === -1) return;
+      const nextIndex = cmdIndex + 1;
+      if (nextIndex >= commandHistory.length) {
+        setCmdIndex(-1);
+        setInputVal("");
+      } else {
+        setCmdIndex(nextIndex);
+        setInputVal(commandHistory[nextIndex]);
       }
     }
   };
@@ -188,112 +179,90 @@ Dual-boots Linux Mint & Windows 11.`,
   return (
     <section className="terminal-section" id="terminal">
       <div className="terminal-container">
-        {/* Section Header with Staggered Text Reveals */}
+        {/* Section Header */}
         <div className="section-header-block">
-          <motion.div
-            className="section-pill"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45, ease: poshEase }}
-          >
-            <span className="pill-dot minimal"></span>
-            <span>CLI INTERFACE</span>
-          </motion.div>
-          <motion.h2
-            className="section-heading"
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, delay: 0.08, ease: poshEase }}
-          >
-            Command Center & <br />
-            <span>Terminal.</span>
-          </motion.h2>
-          <motion.p
-            className="section-subtext"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, delay: 0.16, ease: poshEase }}
-          >
-            For terminal workflows: run commands directly to inspect environment, skills, and projects.
-          </motion.p>
+          <div className="neo-badge neo-badge-magenta">
+            <span className="badge-bullet">■</span>
+            <span>SYSTEM INTERFACE // 03</span>
+          </div>
+          <h2 className="section-heading">
+            Command Interpreter & <br />
+            <span>Interactive Terminal.</span>
+          </h2>
+          <p className="section-subtext">
+            Execute real-time commands to query developer biography, technical stack, hardware specifications, and system telemetry.
+          </p>
         </div>
 
-        {/* The Window Box */}
-        <motion.div
-          className="terminal-box"
-          onClick={() => inputRef.current?.focus()}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.55, delay: 0.22, ease: poshEase }}
-        >
-          {/* Title Bar */}
-          <div className="terminal-bar">
-            <div className="terminal-dots">
-              <span className="dot"></span>
-              <span className="dot"></span>
-              <span className="dot"></span>
+        {/* Windows 98 / MS-DOS Terminal Window */}
+        <div className="neo-window terminal-window">
+          {/* Windows 98 Command Prompt Titlebar */}
+          <div className="neo-titlebar neo-titlebar-terminal">
+            <div className="neo-titlebar-left">
+              <span className="neo-titlebar-icon">📟</span>
+              <span className="neo-titlebar-text">C:\WIN98\COMMAND.COM - [80x25]</span>
             </div>
-            <div className="terminal-title">arjun@simplicity: ~ (mint/zsh)</div>
-            <div className="terminal-status-badge">
-              <span className="pulse-mini"></span>
-              <span>READY</span>
+            <div className="neo-titlebar-controls">
+              <span className="neo-win-btn">_</span>
+              <span className="neo-win-btn">□</span>
+              <span className="neo-win-btn close">✕</span>
             </div>
           </div>
 
-          {/* Quick command suggestion chips */}
+          {/* Quick Command Action Chips (Solid Accent Blocks per reference sheet) */}
           <div className="terminal-quick-chips">
-            <span className="chips-label">COMMANDS:</span>
-            {SUGGESTED_COMMANDS.map((cmd) => (
-              <motion.button
-                key={cmd}
-                type="button"
-                className="chip-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  runCommand(cmd);
-                }}
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.15, ease: poshEase }}
-              >
-                ${cmd}
-              </motion.button>
-            ))}
+            <span className="chips-label">QUICK MACROS:</span>
+            {SUGGESTED_COMMANDS.map((cmd, idx) => {
+              const colors = ["neo-tag-yellow", "neo-tag-teal", "neo-tag-magenta", "neo-tag-lime"];
+              return (
+                <button
+                  key={cmd}
+                  type="button"
+                  className={`neo-tag ${colors[idx % colors.length]} terminal-macro-btn`}
+                  onClick={() => runCommand(cmd)}
+                >
+                  <span>&gt; {cmd}</span>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Output log */}
-          <div className="terminal-body" ref={terminalBodyRef}>
-            {history.map((line, idx) => (
-              <div key={idx} className={`terminal-line ${line.type}`}>
-                {line.type === "ascii" ? (
-                  <pre className="ascii-art">{line.text}</pre>
-                ) : (
-                  <span>{line.text}</span>
-                )}
+          {/* Terminal Screen Console */}
+          <div
+            className="terminal-body"
+            ref={terminalBodyRef}
+            onClick={() => inputRef.current?.focus()}
+          >
+            {history.map((line, i) => (
+              <div key={i} className={`terminal-line terminal-${line.type}`}>
+                <pre>{line.text}</pre>
               </div>
             ))}
+
+            {/* Active Command Input Line */}
+            <div className="terminal-input-row">
+              <span className="terminal-prompt-str">C:\WIN98\SYSTEM&gt;</span>
+              <input
+                ref={inputRef}
+                type="text"
+                className="terminal-active-input"
+                value={inputVal}
+                onChange={(e) => setInputVal(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="type command (e.g. whoami, neofetch)..."
+                autoComplete="off"
+                spellCheck="false"
+              />
+            </div>
           </div>
 
-          {/* Prompt input row */}
-          <div className="terminal-input-row">
-            <span className="terminal-user-badge">arjun@simplicity:~$</span>
-            <input
-              ref={inputRef}
-              type="text"
-              className="terminal-input"
-              value={inputVal}
-              onChange={(e) => setInputVal(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="type 'help' or click commands above..."
-              autoComplete="off"
-              spellCheck="false"
-            />
+          {/* Windows 98 Bottom Status Bar */}
+          <div className="neo-statusbar">
+            <span className="statusbar-item">BUFFER: READY</span>
+            <span className="statusbar-item">CODEPAGE: 437 (US-ASCII)</span>
+            <span className="statusbar-item statusbar-fill">TYPE 'HELP' FOR ALL COMMANDS</span>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

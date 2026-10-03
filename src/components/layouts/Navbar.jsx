@@ -3,23 +3,53 @@ import { motion, AnimatePresence } from "motion/react";
 import logo from "../../assets/Logo.png";
 
 const desktopNavItems = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#work" },
-  { label: "Terminal", href: "#terminal" },
+  { label: "About.exe", href: "#about", icon: "📁" },
+  { label: "Works.sys", href: "#work", icon: "💾" },
+  { label: "Terminal.bat", href: "#terminal", icon: "📟" },
 ];
 
 const mobileNavItems = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#work" },
-  { label: "Terminal", href: "#terminal" },
-  { label: "Contact", href: "#contact" },
+  { label: "About.exe", href: "#about", icon: "📁" },
+  { label: "Works.sys", href: "#work", icon: "💾" },
+  { label: "Terminal.bat", href: "#terminal", icon: "📟" },
+  { label: "Contact.txt", href: "#contact", icon: "✉" },
 ];
-
-const poshEase = [0.16, 1, 0.3, 1];
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState("");
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("portfolio-theme") || "dark";
+    }
+    return "dark";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "paper" : "dark"));
+  };
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        })
+      );
+    };
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,13 +70,8 @@ function Navbar() {
 
   return (
     <header className={`navbar-wrapper ${isScrolled ? "is-scrolled" : ""}`} id="main-nav">
-      <motion.nav
-        className="navbar-pill"
-        initial={{ y: -16, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.45, ease: poshEase }}
-      >
-        {/* Brand / Logo (Left column) */}
+      <nav className="navbar-pill">
+        {/* Brand / Logo (Left column styled as Windows 98 Start Badge) */}
         <div className="nav-brand">
           <a
             href="/"
@@ -54,12 +79,14 @@ function Navbar() {
             className="brand-link"
             aria-label="Go to Top"
           >
-            <motion.img
+            <div className="nav-start-chip">
+              <span className="start-icon">🖥️</span>
+              <span className="start-label">SIMPLICITY.98</span>
+            </div>
+            <img
               src={logo}
               alt="Simplicity Logo"
               className="nav-brand-logo"
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.2, ease: poshEase }}
             />
             <span className="brand-name">Arjun Sanesh</span>
           </a>
@@ -68,32 +95,45 @@ function Navbar() {
         {/* Desktop Navigation Links (Center column) */}
         <div className="nav-center-links">
           {desktopNavItems.map((item) => (
-            <motion.a
+            <a
               key={item.label}
               href={item.href}
               onClick={(e) => scrollToSection(e, item.href.replace("#", ""))}
               className="nav-link-item"
-              whileHover={{ y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.18, ease: poshEase }}
             >
-              {item.label}
-            </motion.a>
+              <span className="nav-item-icon">{item.icon}</span>
+              <span>{item.label}</span>
+            </a>
           ))}
         </div>
 
-        {/* Right Actions - Contact CTA + Mobile Hamburger */}
+        {/* Right Actions: Theme Toggle, Clock, Contact CTA & Mobile Hamburger */}
         <div className="nav-right-actions">
-          <motion.a
+          {/* Theme Mode Toggle (Cyber 98 Dark vs Paper Beige) */}
+          <button
+            type="button"
+            className="nav-theme-toggle-btn"
+            onClick={toggleTheme}
+            title={theme === "dark" ? "Switch to Paper Beige Vintage Theme" : "Switch to Cyber 98 Dark Theme"}
+            aria-label="Toggle Theme"
+          >
+            <span className="theme-toggle-icon">{theme === "dark" ? "☀" : "☾"}</span>
+            <span className="theme-toggle-text">{theme === "dark" ? "PAPER" : "DARK"}</span>
+          </button>
+
+          {/* Windows 98 Style Live System Clock */}
+          <div className="nav-system-tray" title="System Time (Local)">
+            <span className="tray-time">{currentTime || "12:00 PM"}</span>
+          </div>
+
+          <a
             href="#contact"
             onClick={(e) => scrollToSection(e, "contact")}
             className="nav-cta-btn"
-            whileHover={{ y: -1 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.18, ease: poshEase }}
           >
-            Contact
-          </motion.a>
+            <span>Contact</span>
+            <span className="cta-arrow">✉</span>
+          </a>
 
           <button
             type="button"
@@ -106,7 +146,7 @@ function Navbar() {
             <span className={`hamburger-bar ${isMobileMenuOpen ? "bot-open" : ""}`}></span>
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Drawer with AnimatePresence */}
       <AnimatePresence>
@@ -117,7 +157,7 @@ function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.24, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             <motion.div
               className="mobile-drawer"
@@ -125,36 +165,52 @@ function Navbar() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 0.32, ease: poshEase }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="drawer-header">
-                <span className="drawer-title">Navigation</span>
+                <div className="drawer-title-wrap">
+                  <span className="drawer-icon">💾</span>
+                  <span className="drawer-title">SYSTEM_MENU.EXE</span>
+                </div>
                 <button
                   type="button"
                   className="drawer-close-btn"
                   onClick={() => setIsMobileMenuOpen(false)}
                   aria-label="Close menu"
                 >
-                  <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" strokeWidth="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
+                  ✕
                 </button>
               </div>
+
+              {/* Theme toggle inside mobile drawer */}
+              <div className="drawer-theme-strip">
+                <button
+                  type="button"
+                  className="drawer-theme-toggle"
+                  onClick={toggleTheme}
+                >
+                  <span>THEME: {theme === "dark" ? "CYBER 98 (DARK)" : "PAPER BEIGE (RETRO)"}</span>
+                  <span className="drawer-toggle-badge">{theme === "dark" ? "SWITCH TO BEIGE" : "SWITCH TO DARK"}</span>
+                </button>
+              </div>
+
               <div className="drawer-links">
-                {mobileNavItems.map((item, idx) => (
-                  <motion.a
+                {mobileNavItems.map((item) => (
+                  <a
                     key={item.label}
                     href={item.href}
                     onClick={(e) => scrollToSection(e, item.href.replace("#", ""))}
                     className="drawer-link"
-                    initial={{ opacity: 0, x: 12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.04 * idx, duration: 0.25, ease: poshEase }}
                   >
-                    {item.label}
-                  </motion.a>
+                    <span className="drawer-link-icon">{item.icon}</span>
+                    <span>{item.label}</span>
+                  </a>
                 ))}
+              </div>
+
+              <div className="drawer-footer-tray">
+                <span>SIMPLICITY_OS 98.4</span>
+                <span>{currentTime}</span>
               </div>
             </motion.div>
           </motion.div>
