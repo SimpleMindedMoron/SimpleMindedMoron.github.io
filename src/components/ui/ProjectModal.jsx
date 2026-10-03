@@ -34,11 +34,11 @@ function ProjectModal({ project, onClose }) {
         aria-modal="true"
         aria-labelledby="modal-title"
       >
-        {/* Windows 98 Modal Titlebar */}
+        {/* Modal Titlebar */}
         <div className="neo-titlebar">
           <div className="neo-titlebar-left">
-            <span className="neo-titlebar-icon">💾</span>
-            <span className="neo-titlebar-text">PROPERTIES_INSPECTOR.EXE // {project.title}</span>
+            <span className="neo-titlebar-dot"></span>
+            <span className="neo-titlebar-text">inspector.exe // {project.title}</span>
           </div>
           <div className="neo-titlebar-controls">
             <button

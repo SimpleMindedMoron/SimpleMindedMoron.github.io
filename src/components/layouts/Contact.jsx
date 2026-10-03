@@ -30,24 +30,17 @@ function Contact() {
         <div className="neo-window contact-window">
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
-              <span className="neo-titlebar-icon">✉</span>
+              <span className="neo-titlebar-dot"></span>
               <span className="neo-titlebar-text">contact.exe</span>
             </div>
           </div>
 
           <div className="contact-window-content">
             <div className="contact-layout-grid">
-              {/* Left Column: Direct Info */}
+              {/* Left Column: Direct Profiles */}
               <div className="contact-info-panel">
-                <div className="neo-box info-status-box">
-                  <span className="info-title-badge">COMMUNICATION DISPATCH</span>
-                  <p className="info-desc">
-                    Send a message directly via the form on the right, or connect through the profiles below for technical inquiries, collaborations, and projects.
-                  </p>
-                </div>
-
                 <div className="neo-box social-links-panel">
-                  <span className="social-links-label">PROFILES</span>
+                  <span className="social-links-label">DIRECT PROFILES</span>
                   <div className="social-buttons-list">
                     <a
                       href="https://github.com/Simplemindedmoron"

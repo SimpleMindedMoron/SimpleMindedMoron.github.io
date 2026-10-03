@@ -87,7 +87,7 @@ function Work() {
         {filteredProjects.length === 0 && (
           <div className="neo-window empty-results-window">
             <div className="empty-state-content">
-              <span className="empty-icon">📦</span>
+              <span className="neo-tag">[EMPTY_QUERY]</span>
               <h3 className="empty-title">No matching projects</h3>
               <p className="empty-desc">
                 No systems found matching "{searchQuery}".

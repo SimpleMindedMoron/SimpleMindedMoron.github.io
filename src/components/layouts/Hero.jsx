@@ -51,7 +51,7 @@ function Hero() {
           {/* Titlebar: main.exe without window controls */}
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
-              <span className="neo-titlebar-icon">💻</span>
+              <span className="neo-titlebar-dot"></span>
               <span className="neo-titlebar-text">main.exe</span>
             </div>
           </div>

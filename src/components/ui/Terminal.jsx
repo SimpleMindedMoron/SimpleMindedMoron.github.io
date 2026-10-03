@@ -145,20 +145,21 @@ GitHub:   github.com/Simplemindedmoron`,
         <div className="neo-window terminal-window">
           <div className="neo-titlebar">
             <div className="neo-titlebar-left">
-              <span className="neo-titlebar-icon">📟</span>
+              <span className="neo-titlebar-dot"></span>
               <span className="neo-titlebar-text">terminal.exe</span>
             </div>
           </div>
 
-          {/* Clean Shortcuts */}
+          {/* Clean Tactile Shortcuts */}
           <div className="terminal-quick-chips">
             <span className="chips-label">SHORTCUTS:</span>
             {SUGGESTED_COMMANDS.map((cmd) => (
               <button
                 key={cmd}
                 type="button"
-                className="neo-tag terminal-macro-btn"
+                className="terminal-macro-btn"
                 onClick={() => runCommand(cmd)}
+                title={`Run ${cmd}`}
               >
                 <span>{cmd}</span>
               </button>

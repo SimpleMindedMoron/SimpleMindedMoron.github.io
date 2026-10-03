@@ -1,5 +1,5 @@
 function ProjectCard({ project, index, onSelect }) {
-  const formattedIndex = String(index + 1).padStart(2, "0");
+  const prjNumber = `PRJ_${index + 1}`;
 
   return (
     <div
@@ -14,15 +14,13 @@ function ProjectCard({ project, index, onSelect }) {
         }
       }}
     >
-      {/* Titlebar */}
-      <div className="neo-titlebar">
+      {/* Titlebar with automatic PRJ_ index */}
+      <div className="neo-titlebar project-card-titlebar">
         <div className="neo-titlebar-left">
-          <span className="neo-titlebar-icon">💾</span>
-          <span className="neo-titlebar-text">SYS_{formattedIndex} // {project.title}</span>
+          <span className="neo-titlebar-dot"></span>
+          <span className="neo-titlebar-text prj-index-text">{prjNumber}</span>
         </div>
-        <div className="neo-titlebar-controls">
-          <span className="neo-win-btn">↗</span>
-        </div>
+        <span className="card-cat-badge-simple">{project.category}</span>
       </div>
 
       {/* Card Image Thumbnail */}
@@ -33,7 +31,6 @@ function ProjectCard({ project, index, onSelect }) {
           className="card-project-img"
           loading="lazy"
         />
-        <span className="card-cat-badge">{project.category}</span>
       </div>
 
       {/* Card Content Body */}
