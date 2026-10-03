@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import logo from "../../assets/Logo.png";
 
@@ -25,6 +26,22 @@ function Navbar() {
     }
     return "dark";
   });
+
+  // Body scroll lock on mobile when drawer is open
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      if (isMobileMenuOpen) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "";
+      }
+    }
+    return () => {
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "";
+      }
+    };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -153,64 +170,68 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            className="mobile-drawer-backdrop"
-            onClick={() => setIsMobileMenuOpen(false)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
-            <motion.div
-              className="mobile-drawer"
-              onClick={(e) => e.stopPropagation()}
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="drawer-header">
-                <span className="drawer-title">MENU</span>
-                <button
-                  type="button"
-                  className="drawer-close-btn"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  aria-label="Close menu"
+      {/* Mobile Drawer mounted directly to body to avoid clipping / z-index traps */}
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                className="mobile-drawer-backdrop"
+                onClick={() => setIsMobileMenuOpen(false)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
+              >
+                <motion.div
+                  className="mobile-drawer"
+                  onClick={(e) => e.stopPropagation()}
+                  initial={{ x: "100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "100%" }}
+                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  ✕
-                </button>
-              </div>
+                  <div className="drawer-header">
+                    <span className="drawer-title">SYSTEM MENU</span>
+                    <button
+                      type="button"
+                      className="drawer-close-btn"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      aria-label="Close menu"
+                    >
+                      ✕
+                    </button>
+                  </div>
 
-              <div className="drawer-theme-strip">
-                <button
-                  type="button"
-                  className="drawer-theme-toggle"
-                  onClick={toggleTheme}
-                >
-                  <span>THEME: {theme === "dark" ? "DARK" : "LIGHT"}</span>
-                  <span className="drawer-toggle-badge">TOGGLE</span>
-                </button>
-              </div>
+                  <div className="drawer-theme-strip">
+                    <button
+                      type="button"
+                      className="drawer-theme-toggle"
+                      onClick={toggleTheme}
+                    >
+                      <span>THEME: {theme === "dark" ? "DARK" : "LIGHT"}</span>
+                      <span className="drawer-toggle-badge">TOGGLE</span>
+                    </button>
+                  </div>
 
-              <div className="drawer-links">
-                {mobileNavItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={(e) => scrollToSection(e, item.href.replace("#", ""))}
-                    className="drawer-link"
-                  >
-                    <span>{item.label}</span>
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+                  <div className="drawer-links">
+                    {mobileNavItems.map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={(e) => scrollToSection(e, item.href.replace("#", ""))}
+                        className="drawer-link"
+                      >
+                        <span>{item.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </header>
   );
 }
